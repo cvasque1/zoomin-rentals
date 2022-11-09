@@ -1,0 +1,70 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+    <h1>Update {{driver["first_name"]}} {{driver["last_name"]}}</h1>
+        <div class="container data_table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>first name</th>
+                        <th>last name</th>
+                        <th>email</th>
+                        <th>phone</th>
+                        <th>street</th>
+                        <th>city</th>
+                        <th>state</th>
+                        <th>zip code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    {% for key in driver.keys() %}
+                        <td>{{driver[key]}}</td>
+                    {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form_div">
+            <form class="form" method="post" action="/Drivers/update/{{driver['driver_id']}}" id="updateDriver">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> First Name </label>
+                        <input type="text" class="field__input" name="first_name" value="{{driver['first_name']}}" >
+                    </div>
+                    <div class="field__item">
+                        <label> Last Name </label>
+                        <input type="text" class="field__input" name="last_name" value="{{driver['last_name']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> Email </label>
+                        <input type="text" class="field__input" name="email" value="{{driver['email']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> Phone </label>
+                        <input type="text" class="field__input" name="phone" value="{{driver['phone']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> Street </label>
+                        <input type="text" class="field__input" name="street" value="{{driver['street']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> City </label>
+                        <input type="text" class="field__input" name="city" value="{{driver['city']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> State </label>
+                        <input type="text" class="field__input" name="state" value="{{driver['state']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> Zipcode </label>
+                        <input type="number" class="field__input" name="zipcode" value="{{driver['zipcode']}}">
+                    </div>
+                    <input type="submit" value="Update" name="update_driver" class="field__button">
+                    <input type="submit" value="Cancel" name="cancel_update" class="field__button">
+                </fieldset>
+            </form>
+        </div>
+</div>
+{% endblock %}

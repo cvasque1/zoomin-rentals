@@ -6,156 +6,80 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>driver_id</th>
-                    <th>first_name</th>
-                    <th>last_name</th>
+                    <th>id</th>
+                    <th>first name</th>
+                    <th>last name</th>
                     <th>email</th>
                     <th>phone</th>
                     <th>street</th>
                     <th>city</th>
                     <th>state</th>
-                    <th>zipcode</th>
-                    <th></th>
+                    <th>zip code</th>
+                    <th>edit</th>
+                    <th>delete</th>
                 </tr>
             </thead>
             <tbody>
+            {% for driver in Drivers %}
                 <tr>
-                    <td>1</td>
-                    <td>Joanne</td>
-                    <td>Dorsey</td>
-                    <td>erika1978@gmail.com</td>
-                    <td>831-291-5800</td>
-                    <td>4306 Atha Drive</td>
-                    <td>Taft</td>
-                    <td>CA</td>
-                    <td>93258</td>
-                    <td><button class="driver_delete">Delete</button></td>
+                {% for key in driver.keys() %}
+                    <td>{{driver[key]}}</td>
+                {% endfor %}
+                    <td><a href="Drivers/update/{{driver['driver_id']}}">Edit</a></td>
+                    <td><a href="Drivers/delete/{{driver['driver_id']}}">Delete</a></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Javier</td>
-                    <td>Jolcomb</td>
-                    <td>trenton1975@hotmail.com</td>
-                    <td>323-394-9408</td>
-                    <td>4121 Doctors Drive</td>
-                    <td>Los Angeles</td>
-                    <td>CA</td>
-                    <td>90017</td>
-                    <td><button class="driver_delete">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Inez</td>
-                    <td>Jackson</td>
-                    <td>hildegard2010@gmail.com</td>
-                    <td>845-612-8109</td>
-                    <td>3730 Benedrum Drive</td>
-                    <td>Brewster</td>
-                    <td>NY</td>
-                    <td>10509</td>
-                    <td><button class="driver_delete">Delete</button></td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
     <div class="container data_forms">
         <div class="form_div">
-            <form class="form" method="POST" action="./" id="form1">
+            <form class="form" method="POST" action="/Drivers" id="addDriver">
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> First Name </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="first_name" required>
                     </div>
                     <div class="field__item">
                         <label> Last Name </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="last_name" required>
                     </div>
                     <div class="field__item">
                         <label> Email </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="email" required>
                     </div>
                     <div class="field__item">
                         <label> Phone </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="phone" required>
                     </div>
                     <div class="field__item">
                         <label> Street </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="street" required>
                     </div>
                     <div class="field__item">
                         <label> City </label>
-                        <input type="number" class="field__input">
+                        <input type="text" class="field__input" name="city" required>
                     </div>
                     <div class="field__item">
                         <label> State </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="state" required>
                     </div>
                     <div class="field__item">
                         <label> Zipcode </label>
-                        <input type="number" class="field__input">
+                        <input type="number" class="field__input" name="zipcode" required>
                     </div>
-                    <button class="field__button">
-                        <a href="#" class="field__button">Add</a>
-                    </button>
+                    <input type="submit" value="Add" name="add_driver" class="field__button">
                 </fieldset>
             </form>
         </div>
         <div class="form_div">
-            <form class="form" method="POST" action="./" id="form1">
-                <fieldset class="form__field">
-                    <div class="field__item">
-                        <label> Driver ID </label>
-                        <input type="number" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> First Name </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Last Name </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Email </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Phone </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Street </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> City </label>
-                        <input type="number" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> State </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Zipcode </label>
-                        <input type="number" class="field__input">
-                    </div>
-                    <button class="field__button">
-                        <a href="#" class="field__button">Update</a>
-                    </button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="form_div">
-            <form class="form" method="POST" action="./" id="form1">
+            <form class="form" method="POST" action="/Drivers" id="searchDriver">
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> Last Name </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="last_name" required>
                     </div>
-                    <button class="field__button">
-                        <a href="#" class="field__button">Search</a>
-                    </button>
+                    <input type="submit" value="Search" name="search_driver" class="field__button">
                 </fieldset>
             </form>
         </div>
