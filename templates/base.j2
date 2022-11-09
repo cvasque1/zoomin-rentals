@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<marquee scrollamount="1000">
+<pre>
+______________________
+</pre>
+</marquee>
+    <title>Zoomin' Rentals</title>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='/styles/style.css')}}"/>
+    <marquee direction="right" scrollamount="50">
+    <pre>
+        _-_-  _/\______\\__
+    _-_-__  / ,-. -|-  ,-.`-.    
+        _-_- `( o )----( o )-'
+            `-'      `-'
+    </pre>
+    </marquee>
+<marquee scrollamount="1000">
+<pre>
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+</pre>
+</marquee>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>Zoomin' Rentals</h1>
+            <div class="navbar__menu">
+                <a class="navbar_link" href="/">Home</a>
+                <a class="navbar_link" href="/Drivers">Drivers</a>
+                <a class="navbar_link" href="/Drivers_Rentals">Drivers_Rentals</a>
+                <a class="navbar_link" href="/Rentals">Rentals</a>
+                <a class="navbar_link" href="/Cars">Cars</a>
+                <a class="navbar_link" href="/Locations">Locations</a>
+            </div>
+        </nav>
+    </header>
+
+
+
+    {% block content %}
+    {% endblock %}   
+</body>
+</html>

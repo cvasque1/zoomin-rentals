@@ -1,0 +1,136 @@
+header {
+    border-bottom: 1px black solid;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#home {
+    width: 80%;
+}
+
+h1 {
+    text-align: center;
+}
+
+nav > h1 {
+    align-self: center;
+    margin-right: 40px;
+    font-size: 2em;
+}
+
+nav {
+    /* background-color: #E2DCC8; */
+    color:#100F0F;
+    /* border-top: 1px solid #E2DCC8;
+    border-bottom: 1px solid #E2DCC8; */
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0 auto;
+    padding: 0 30px;
+    text-decoration: none;
+    vertical-align: middle;
+  
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 10vh;
+  }
+  
+  .navbar__menu {
+    display: flex;
+    height: 100%;
+  }
+
+  nav a {
+    /* background-color: #E2DCC8; */
+    color:#02182B;
+    /* border: 1px solid #E2DCC8; */
+    font-size: 1em;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    padding: 0 30px;
+    text-decoration: none;
+    vertical-align: middle;
+    
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    transition-duration: .3s;
+  }
+  
+  nav a:hover {
+    background-color: #6772e5;
+    color: #F8F4E3;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    padding: 0 30px;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+
+
+.data_table {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+table {
+    box-shadow: 0 6px 12px -2px rgb(50 50 93 / 25%), 0 3px 7px -3px rgb(0 0 0 / 30%);
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+thead tr:first-of-type {
+    background-color: #6772e5;
+    color: white;
+}
+
+tbody tr:nth-of-type(2n+1) {
+    background-color: #EBECF0;
+}
+
+
+table th, table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.data_forms {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+

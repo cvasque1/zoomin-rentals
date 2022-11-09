@@ -1,0 +1,165 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+<h1>Drivers</h1>
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>driver_id</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>street</th>
+                    <th>city</th>
+                    <th>state</th>
+                    <th>zipcode</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Joanne</td>
+                    <td>Dorsey</td>
+                    <td>erika1978@gmail.com</td>
+                    <td>831-291-5800</td>
+                    <td>4306 Atha Drive</td>
+                    <td>Taft</td>
+                    <td>CA</td>
+                    <td>93258</td>
+                    <td><button class="driver_delete">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Javier</td>
+                    <td>Jolcomb</td>
+                    <td>trenton1975@hotmail.com</td>
+                    <td>323-394-9408</td>
+                    <td>4121 Doctors Drive</td>
+                    <td>Los Angeles</td>
+                    <td>CA</td>
+                    <td>90017</td>
+                    <td><button class="driver_delete">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Inez</td>
+                    <td>Jackson</td>
+                    <td>hildegard2010@gmail.com</td>
+                    <td>845-612-8109</td>
+                    <td>3730 Benedrum Drive</td>
+                    <td>Brewster</td>
+                    <td>NY</td>
+                    <td>10509</td>
+                    <td><button class="driver_delete">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
+        <div class="form_div">
+            <form class="form" method="POST" action="./" id="form1">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> First Name </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Last Name </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Email </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Phone </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Street </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> City </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> State </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Zipcode </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <button class="field__button">
+                        <a href="#" class="field__button">Add</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="./" id="form1">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Driver ID </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> First Name </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Last Name </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Email </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Phone </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Street </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> City </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> State </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Zipcode </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <button class="field__button">
+                        <a href="#" class="field__button">Update</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="form_div">
+            <form class="form" method="POST" action="./" id="form1">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Last Name </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <button class="field__button">
+                        <a href="#" class="field__button">Search</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+ </div>
+{% endblock %}

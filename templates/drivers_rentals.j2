@@ -1,0 +1,58 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+    <h1>Drivers_Rentals</h1>
+    <div class="container data_table">
+        <table class="table">
+            
+            <thead>
+                <tr>
+                    <th>driver_rental</th>
+                    <th>driver_id</th>
+                    <th>rental_id</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td><button class="driver_delete">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td><button class="driver_delete">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td><button class="driver_delete">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
+        <div class="form_div">
+            <form class="form" method="POST" action="./" id="form1">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Driver ID </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Rental ID </label>
+                        <input type="text" class="field__input">
+                    </div>
+                    <button class="field__button">
+                        <a href="#" class="field__button">Add</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

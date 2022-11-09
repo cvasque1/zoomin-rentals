@@ -1,0 +1,214 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+<h1>Rentals</h1>
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>rental_id</th>
+                    <th>location_id</th>
+                    <th>car_id</th>
+                    <th>rental_time</th>
+                    <th>rental_date</th>
+                    <th>pickup_time</th>
+                    <th>pickup_date</th>
+                    <th>return_time</th>
+                    <th>return_date</th>
+                    <th>payment_type</th>
+                    <th>current_status</th>
+                    <th>total_penalties</th>
+                    <th>total_cost</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1100</td>
+                    <td>2020-06-12</td>
+                    <td>1400</td>
+                    <td>2020-06-13</td>
+                    <td>1400</td>
+                    <td>2020-06-15</td>
+                    <td>credit</td>
+                    <td>active</td>
+                    <td>20</td>
+                    <td>100</td>
+                    <td><button class="rental_delete">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1300</td>
+                    <td>2020-02-17</td>
+                    <td>1400</td>
+                    <td>2020-06-13</td>
+                    <td>1400</td>
+                    <td>2020-06-15</td>
+                    <td>credit</td>
+                    <td>active</td>
+                    <td>20</td>
+                    <td>100</td>
+                    <td><button class="rental_delete">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>700</td>
+                    <td>2021-09-03</td>
+                    <td>1000</td>
+                    <td>2021-09-04</td>
+                    <td>1000</td>
+                    <td>2021-09-07</td>
+                    <td>cash</td>
+                    <td>active</td>
+                    <td>40</td>
+                    <td>75</td>
+                    <td><button class="rental_delete">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+    <div class="container data_forms">
+        <div class="form_div">
+            <form class="form" method="POST" action="./" id="form1">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Location ID </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Car ID </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Rental Time </label>
+                        <input type="time" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Rental Date </label>
+                        <input type="date" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Pickup Time </label>
+                        <input type="time" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Pickup Date </label>
+                        <input type="date" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Return Time </label>
+                        <input type="time" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Return Date </label>
+                        <input type="date" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Payment Type </label>
+                        <select class="field__input">
+                            <option value="">--Please choose an option--</option>
+                            <option value="cash">Cash</option>
+                            <option value="credit">Credit</option>
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Current Status </label>
+                        <select class="field__input">
+                            <option value="">--Please choose an option--</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Total Penalties </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Total Cost </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <button class="field__button">
+                        <a href="#" class="field__button">Add</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="./" id="form1">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Rental ID </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Location ID </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Car ID </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Rental Time </label>
+                        <input type="time" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Rental Date </label>
+                        <input type="date" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Pickup Time </label>
+                        <input type="time" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Pickup Date </label>
+                        <input type="date" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Return Time </label>
+                        <input type="time" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Return Date </label>
+                        <input type="date" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Payment Type </label>
+                        <select class="field__input">
+                            <option value="">--Please choose an option--</option>
+                            <option value="cash">Cash</option>
+                            <option value="credit">Credit</option>
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Current Status </label>
+                        <select class="field__input">
+                            <option value="">--Please choose an option--</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Total Penalties </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <div class="field__item">
+                        <label> Total Cost </label>
+                        <input type="number" class="field__input">
+                    </div>
+                    <button class="field__button">
+                        <a href="#" class="field__button">Update</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
