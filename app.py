@@ -108,11 +108,22 @@ def drivers_rentals():
 def locations():
     if request.method == "POST":
         if request.form.get("add_location"):
-    
+            address_input = request.form["address"]
+            city_input = request.form["city"]
+            state_input = request.form["state"]
+            zip_input = request.form["zip_code"]
+            num_cars_input = request.form["num_cars"]
+            query_parameters = [address_input, city_input, state_input, zip_input, num_cars_input]
 
-    
+            query = "INSERT INTO Locations (address, city, state, zip_code, num_cars) VALUES (%s, %s, %s, %s, %s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
+            return redirect("/Locations")
+
     else:
-        return render_template('locations.j2')
+        query = "SELECT * FROM Locations;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return render_template('locations.j2', Locations=results)
 
 
 # @app.route('/')
