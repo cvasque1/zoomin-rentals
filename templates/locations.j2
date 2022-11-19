@@ -15,7 +15,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> {# Section for displaying query/table items #}
                 <tr>
                     <td>1</td>
                     <td>1001 Fremont St</td>
@@ -31,7 +31,7 @@
                     <td>Los Angeles</td>
                     <td>CA</td>
                     <td>90008</td>
-                    <td>25</td>
+                    <td>25</td> 
                     <td><button class="location_delete">Delete</button></td>
                 </tr>
                 <tr>
@@ -46,37 +46,35 @@
             </tbody>
         </table>
     </div>
-    <div class="container data_forms">
+    <div class="container data_forms"> {# Form for Adding Location #}
         <div class="form_div">
-            <form class="form" method="POST" action="./" id="form1">
+            <form class="form" method="POST" action="/Locations" id="addLocations">
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> Address </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name ="address" required>
                     </div>
                     <div class="field__item">
                         <label> City </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name ="city" required>
                     </div>
                     <div class="field__item">
                         <label> State </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name ="state" required>
                     </div>
                     <div class="field__item">
                         <label> Zipcode </label>
-                        <input type="number" class="field__input">
+                        <input type="number" class="field__input" name ="zip_code" required>
                     </div>
                     <div class="field__item">
                         <label> Number of Cars </label>
-                        <input type="number" class="field__input">
+                        <input type="number" class="field__input" name ="num_cars" required>
                     </div>
-                    <button class="field__button">
-                        <a href="#" class="field__button">Add</a>
-                    </button>
+                    <input type="submit" value="Add" name="add_location" class="field__button">
                 </fieldset>
             </form>
         </div>
-        <div class="form_div">
+        {# <div class="form_div">
             <form class="form" method="POST" action="./" id="form1">
                 <fieldset class="form__field">
                     <div class="field__item">
@@ -108,7 +106,7 @@
                     </button>
                 </fieldset>
             </form>
-        </div>
+        </div> #} Old form for updating
     </div>
 </div>
 {% endblock %}

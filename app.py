@@ -29,7 +29,6 @@ def root():
 def rentals():
     return render_template('rentals.j2')
 
-
 @app.route('/Cars')
 def cars():
     return render_template('cars.j2')
@@ -105,9 +104,15 @@ def drivers_rentals():
     return render_template('drivers_rentals.j2')
 
 
-@app.route('/Locations')
+@app.route('/Locations', methods=["POST", "GET"])
 def locations():
-    return render_template('locations.j2')
+    if request.method == "POST":
+        if request.form.get("add_location"):
+    
+
+    
+    else:
+        return render_template('locations.j2')
 
 
 # @app.route('/')
