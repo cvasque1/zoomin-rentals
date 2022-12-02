@@ -15,8 +15,8 @@
                     <th>city</th>
                     <th>state</th>
                     <th>zip code</th>
-                    <th>edit</th>
-                    <th>delete</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +26,7 @@
                     <td>{{driver[key]}}</td>
                 {% endfor %}
                     <td><a href="Drivers/update/{{driver['driver_id']}}">Edit</a></td>
-                    <td><a href="Drivers/delete/{{driver['driver_id']}}">Delete</a></td>
+                    <td><a href="Drivers/delete/{{driver['driver_id']}}" onclick="return confirm('Delete {{driver['first_name']}} {{driver['last_name']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -35,6 +35,7 @@
     <div class="container data_forms">
         <div class="form_div">
             <form class="form" method="POST" action="/Drivers" id="addDriver">
+                <label for="cars">Add a Driver:</label>
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> First Name </label>
@@ -74,16 +75,20 @@
         </div>
         <div class="form_div">
             <form class="form" method="POST" action="/Drivers" id="searchDriver">
+                <label for="cars">Filter drivers by last name (partial search allowed):</label>
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> Last Name </label>
-                        <input type="text" class="field__input" name="last_name" required>
+                        <input type="text" class="field__input" name="last_name">
                     </div>
                     <input type="submit" value="Search" name="search_driver" class="field__button">
+                    <input type="submit" value="Reset" name="reset_search" class="field__button">
                 </fieldset>
             </form>
         </div>
-
     </div>
  </div>
+ <script>
+
+</script>
 {% endblock %}

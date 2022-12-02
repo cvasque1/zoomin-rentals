@@ -119,15 +119,15 @@ INSERT INTO drivers_rentals (driver_id, rental_id) VALUES
 -- We getting an error with the input below. Currently hardcoding id inputs for intersection table driver_rentals
 
 -- (
---     (SELECT driver_id FROM Drivers WHERE first_name = 'Joanne' AND last_name = 'Dorsey'),
+--     (SELECT driver_id FROM Drivers WHERE first_name = "Joanne" AND last_name = "Dorsey"),
 --     (SELECT rental_id FROM Rentals WHERE car_id = 1 AND pickup_time = '14:00:00' AND pickup_date = '2020-06-13')
 -- )
 -- (
---     (SELECT driver_id FROM Drivers WHERE first_name = 'Joanne' AND last_name = 'Dorsey'),
+--     (SELECT driver_id FROM Drivers WHERE first_name = "Joanne" AND last_name = "Dorsey"),
 --     (SELECT rental_id FROM Rentals WHERE car_id = 1 AND pickup_time = '18:00:00' AND pickup_date = '2020-02-18')
 -- )
 -- (
---     (SELECT driver_id FROM Drivers WHERE first_name = 'Javier' AND last_name = 'Jolcomb'),
+--     (SELECT driver_id FROM Drivers WHERE first_name = "Javier" AND last_name = "Jolcomb"),
 --     (SELECT rental_id FROM Rentals WHERE car_id = 2 AND pickup_time = '10:00:00' AND pickup_date = '2021-09-04')
 -- );
 
