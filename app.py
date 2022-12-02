@@ -106,8 +106,8 @@ def drivers_rentals():
 
 @app.route('/Locations', methods=["POST", "GET"])
 def locations():
-    if request.method == "POST":
-        if request.form.get("add_location"):
+    if request.method == "POST": #add location function
+        if request.form.get("add_location"): #if the name of form is "add_location"
             address_input = request.form["address"]
             city_input = request.form["city"]
             state_input = request.form["state"]
@@ -117,13 +117,49 @@ def locations():
 
             query = "INSERT INTO Locations (address, city, state, zip_code, num_cars) VALUES (%s, %s, %s, %s, %s);"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
-            return redirect("/Locations")
+            return redirect("/Locations") #essentially a refresh at the end
 
-    else:
+    else: #otherwise just display all records into table
         query = "SELECT * FROM Locations;"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
         return render_template('locations.j2', Locations=results)
+
+
+@app.route('Locations/update/<int:id>', methods=["POST", "GET"])
+def location_update(id):
+    if request.method == "POST":
+        if request.form.get("update_location")
+            address_input = request.form["address"]
+            city_input = request.form["city"]
+            state_input = request.form["state"]
+            zip_input = request.form["zip_code"]
+            num_cars_input = request.form["num_cars"]
+            query_parameters = [address_input, city_input, state_input, zip_input, num_cars_input]
+            query_parameters.append(id)
+
+            query = "UPDATE Locations SET Locations.address = %s, Locations.city = %s, Locations.state = %s, Locations.zip_code= %s, Locations.num_cars = %s WHERE Locations.location_id = %s"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
+
+        return redirect("/Locations")
+
+    else:
+        query = "SELECT * From Locations WHERE location_id = %s"
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
+        results = cursor.fetchall()
+        return render_template('locations_update.j2', location=results[0])
+
+
+@app.route('Locations/delete/<int:id>', methods=["POST","GET"])
+def locations_delete(id):
+    query = "DELETE from Locations WHERE location_id = %s"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
+    return redirect("/Locations")
+
+
+
+
+
 
 
 # @app.route('/')

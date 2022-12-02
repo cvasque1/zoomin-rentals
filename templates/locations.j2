@@ -15,8 +15,20 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody> {# Section for displaying query/table items #}
+            <tbody>
+            {% for location in Locations %} {#for every dict in the tuple of dicts #}
                 <tr>
+                {% for key in location.keys() %} {#for every key in the list of keys for each dict, or in other words, for each data point #}
+                    <td>{{location[key]}}</td> {# make a table cell for each k/v pair(the data point) in the dict#}
+                {% endfor %}
+                    <td><a href="Locations/update/{{location['location_id']}}">Edit</a></td>
+                    <td><a href="Locations/delete/{{location['location_id_id']}}">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            {# <tbody>
+                <tr> {# Section for displaying query/table items #}
                     <td>1</td>
                     <td>1001 Fremont St</td>
                     <td>San Francisco</td>
@@ -43,8 +55,7 @@
                     <td>16</td>
                     <td><button class="location_delete">Delete</button></td>
                 </tr>
-            </tbody>
-        </table>
+            </tbody> #}
     </div>
     <div class="container data_forms"> {# Form for Adding Location #}
         <div class="form_div">
