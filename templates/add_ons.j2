@@ -1,0 +1,46 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+<h1>Add-Ons</h1>
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for add in addOns %}
+                <tr>
+                {% for key in add.keys() %}
+                    <td>{{add[key]}}</td>
+                {% endfor %}
+                    <td><a href="Add_Ons/delete/{{add['add_on_id']}}" onclick="return confirm('Delete {{add['name']}} from your records? This action is irreversible.')">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
+        <div class="form_div">
+            <form class="form" method="POST" action="/Add_Ons" id="addAdd_On">
+                <label for="cars">Create an Add-On:</label>
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Name </label>
+                        <input type="text" class="field__input" name="name" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Description </label>
+                        <input type="text" class="field__input" name="description" required>
+                    </div>
+                    <input type="submit" value="Add" name="add_add_on" class="field__button">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

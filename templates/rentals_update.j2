@@ -1,0 +1,141 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+    <h1>Update Rental {{rental['rental_id']}}</h1>
+        <div class="container data_table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Driver</th>
+                        <th>Location</th>
+                        <th>Car</th>
+                        <th>Agent</th>
+                        <th>pickup time</th>
+                        <th>pickup date</th>
+                        <th>return time</th>
+                        <th>return date</th>
+                        <th>payment type</th>
+                        <th>total cost</th>
+                        <th>Add_Ons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    {% for key in rental.keys() %}
+                        <td>{{rental[key]}}</td>
+                    {% endfor %}
+                        <td>
+                        {% for add_on in intersections %}
+                            {{add_on}}<br>
+                        {% endfor %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Rentals/update/{{rental['rental_id']}}" id="updateRental">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Driver </label>
+                        <select class="field__input" name="driver">
+                        {% for d in drivers %}
+                            {% if d['driver_id'] == rental['driver_id'] %}
+                                <option value="{{d['driver_id']}}" selected>{{d['name']}}</option>
+                            {% else %}
+                                <option value="{{d['location_id']}}">{{d['name']}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Location </label>
+                        <select class="field__input" name="location">
+                        {% for loc in locations %}
+                            {% if loc['location_id'] == rental['location_id'] %}
+                                <option value="{{loc['location_id']}}" selected>{{loc['address']}}, {{loc['city']}}</option>
+                            {% else %}
+                                <option value="{{loc['location_id']}}">{{loc['address']}}, {{loc['city']}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Car </label>
+                        <select class="field__input" name="car">
+                        {% for car in cars %}
+                            {% if car['car_id'] == rental['car_id'] %}
+                                <option value="{{car['car_id']}}" selected>{{car['color']}} {{car['make']}} {{car['model']}} - {{car['vin']}}</option>
+                            {% else %}
+                                <option value="{{car['car_id']}}">{{car['color']}} {{car['make']}} {{car['model']}} - {{car['vin']}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Agent </label>
+                        <select class="field__input" name="agent">
+                        {% for agent in agents %}
+                            {% if agent['agent_id'] == "none" and rental['agent_id'] == None %}
+                                <option value="none" selected>None</option>
+                            {% elif agent['agent_id'] == rental['agent_id'] %}
+                                <option value="{{agent['agent_id']}}" selected>{{agent['name']}}</option>
+                            {% else %}
+                                <option value="{{agent['agent_id']}}">{{agent['name']}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field__item">
+                        <label> Pickup Time </label>
+                        <input type="time" class="field__input" name="pickup_time" value="{{rental['pickup_time']}}" min="08:00" max="18:00" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Pickup Date </label>
+                        <input type="date" class="field__input" name="pickup_date" value="{{rental['pickup_date']}}" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Return Time </label>
+                        <input type="time" class="field__input" name="return_time" value="{{rental['return_time']}}" min="08:00" max="18:00" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Return Date </label>
+                        <input type="date" class="field__input" name="return_date" value="{{rental['return_date']}}" min="08:00" max="18:00" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Payment Type </label>
+                        <select class="field__input" name="payment" required>
+                        {% if rental['payment_type'] == "cash" %}
+                            <option value="cash" selected>Cash</option>
+                            <option value="credit">Credit</option>
+                        {% else %}
+                            <option value="cash" >Cash</option>
+                            <option value="credit" selected>Credit</option>
+                        {% endif %}
+                        </select>
+                    </div>
+                    <div class="field__item" >
+                        <label> Add-Ons </label>
+                        {% for add in addOns %}
+                            {% if add['name'] in intersections %}
+                                <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}" checked>
+                                <label for="add_ons">{{add['name']}}</label><br>
+                            {% else %}
+                                <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}">
+                                <label for="add_ons">{{add['name']}}</label><br>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="field__item" >
+                        <label> Total Cost </label>
+                        <input type="number" class="field__input" name="cost" value="{{rental['total_cost']}}" required>
+                    </div>
+                    <input type="submit" value="Update" name="update_rental" class="field__button">
+                    <input type="submit" value="Cancel" name="cancel_rental" class="field__button">
+                </fieldset>
+            </form>
+        </div>
+        
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+<h1>Booking Agents</h1>
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                    <th>email</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for agent in Agents %}
+                <tr>
+                {% for key in agent.keys() %}
+                    <td>{{agent[key]}}</td>
+                {% endfor %}
+                    <td><a href="Booking_Agents/update/{{agent['agent_id']}}">Edit</a></td>
+                    <td><a href="Booking_Agents/delete/{{agent['agent_id']}}" onclick="return confirm('Delete {{agent['first_name']}} {{agent['last_name']}} from your records? This action is irreversible.')">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
+        <div class="form_div">
+            <form class="form" method="POST" action="/Booking_Agents" id="addAgent">
+                <label for="cars">Add a Booking Agent:</label>
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> First Name </label>
+                        <input type="text" class="field__input" name="first_name" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Last Name </label>
+                        <input type="text" class="field__input" name="last_name" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Email </label>
+                        <input type="text" class="field__input" name="email" required>
+                    </div>
+                    <input type="submit" value="Add" name="add_agent" class="field__button">
+                </fieldset>
+            </form>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Booking_Agents" id="searchAgent">
+                <label for="cars">Filter booking agents by last name (partial search allowed):</label>
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Last Name </label>
+                        <input type="text" class="field__input" name="last_name">
+                    </div>
+                    <input type="submit" value="Search" name="search_agent" class="field__button">
+                    <input type="submit" value="Reset" name="reset_search" class="field__button">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+ </div>
+ <script>
+
+</script>
+{% endblock %}

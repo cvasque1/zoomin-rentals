@@ -1,0 +1,28 @@
+{% extends "base.j2" %}
+{% block content %}
+<div class="main">
+    <h1>Rentals Add-Ons</h1>
+    <div class="container data_table">
+        <table class="table">
+            
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Rental Id</th>
+                    <th>Add-On Id</th>
+                    <th>Add-On Name</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for rao in rentalAddOns %}
+                <tr>
+                {% for key in rao.keys() %}
+                    <td>{{rao[key]}}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

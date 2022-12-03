@@ -161,3 +161,43 @@ WHERE driver_rental_id = :driver_rental_id_input;
 -- delete an exisiting car
 DELETE FROM Drivers_Rentals WHERE driver_rental_id = :driver_rental_id_input;
 
+-- Intersection Table
+SELECT Rentals_Add_Ons.rental_add_on_id AS id, Rentals.rental_id AS "Rental Id", Add_Ons.add_on_id AS "Add-On Id", Add_Ons.name AS "Add-On Name"  FROM Rentals_Add_Ons 
+INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id 
+INNER JOIN Rentals ON Rentals_Add_Ons.rental_id = Rentals.rental_id;
+
+-- Cars lcoations
+SELECT Cars.car_id, Locations.address AS 'Location', Cars.make, Cars.model, Cars.year, Cars.car_body_type, Cars.daily_price, Cars.color, Cars.license_plate_num, Cars.vin, Cars.current_mileage, Cars.current_availability 
+FROM Cars 
+LEFT JOIN Locations ON Cars.location_id = Locations.location_id; 
+
+SELECT Rentals.rental_id, Rentals.driver_id, Rentals.location_id, Rentals.car_id, Rentals_Add_Ons.add_on_id FROM Rentals INNER JOIN Rentals_Add_Ons ON Rentals.rental_id = 16; 
+
+
+
+SELECT Rentals_Add_Ons.rental_id, Add_Ons.name FROM Rentals_Add_Ons INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id ORDER BY rental_id ASC;
+
+
+SELECT r.rental_id, r.driver_id, r.location_id, r.car_id, ra.add_on_id, 
+    r.rental_time, r.rental_date, r.pickup_time, r.pickup_date, 
+    r.return_time, r.return_date, r.payment_type, r.current_status,
+    r.total_penalties, a.name, r.total_cost
+FROM Rentals AS r 
+LEFT JOIN Rentals_Add_Ons AS ra ON r.rental_id = ra.rental_id 
+LEFT JOIN Add_Ons AS a ON ra.add_on_id = a.add_on_id;
+
+UPDATE Cars SET 
+    location_id = :location_id_input,
+    make = :make_input,
+    model = :model_input,
+    year = :year_input,
+    car_body_type = :car_body_type_input,
+    daily_price = :daily_price_input,
+    color = :color_input,
+    license_plate_num = :license_plate_num_input,
+    vin = :vin_input,
+    current_mileage = :current_mileage_input,
+    current_availability = :current_availability_input
+WHERE car_id = :car_id_input;
+
+UPDATE Rentals_Add_Ons SET

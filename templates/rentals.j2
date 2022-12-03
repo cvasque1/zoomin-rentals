@@ -6,19 +6,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>rental_id</th>
-                    <th>location_id</th>
-                    <th>car_id</th>
-                    <th>rental_time</th>
-                    <th>rental_date</th>
-                    <th>pickup_time</th>
-                    <th>pickup_date</th>
-                    <th>return_time</th>
-                    <th>return_date</th>
-                    <th>payment_type</th>
-                    <th>current_status</th>
-                    <th>total_penalties</th>
-                    <th>total_cost</th>
+                    <th>Id</th>
+                    <th>Driver</th>
+                    <th>Location</th>
+                    <th>Car</th>
+                    <th>Agent</th>
+                    <th>pickup time</th>
+                    <th>pickup date</th>
+                    <th>return time</th>
+                    <th>return date</th>
+                    <th>payment type</th>
+                    <th>total cost</th>
+                    <th>Add-Ons</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -29,8 +28,15 @@
                 {% for key in rental.keys() %}
                     <td>{{rental[key]}}</td>
                 {% endfor %}
-                    <td><a href="./Rentals">Edit</a></td>
-                    <td><a href="./Rentals" onclick="return confirm('Delete rental:{{rental['rental_id']}} from your records? This action is irreversible.')">Delete</a></td>
+                    <td>
+                    {% if intersections[rental['rental_id']]|length > 0 %}
+                        {% for addON in intersections[rental['rental_id']] %}
+                        {{addON}}<br>
+                        {% endfor %}
+                    {% endif %}
+                    </td>
+                    <td><a href="Rentals/update/{{rental['rental_id']}}">Edit</a></td>
+                    <td><a href="Rentals/delete/{{rental['rental_id']}}" onclick="return confirm('Delete rental:{{rental['rental_id']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -41,6 +47,14 @@
             <form class="form" method="POST" action="/Rentals" id="form1">
                 <label for="cars">Add a Rental:</label>
                 <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Driver </label>
+                        <select class="field__input" name="driver" required>
+                        {% for d in drivers %}
+                            <option value="{{d['driver_id']}}">{{d['name']}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
                     <div class="field__item">
                         <label> Location </label>
                         <select class="field__input" name="location" required>
@@ -58,12 +72,13 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Rental Time </label>
-                        <input type="time" class="field__input" name="rental_time"  min="08:00" max="18:00" required>
-                    </div>
-                    <div class="field__item">
-                        <label> Rental Date </label>
-                        <input type="date" class="field__input" name="rental_date" required>
+                        <label> Agent </label>
+                        <select class="field__input" name="agent" >
+                            <option value="none" selected>None</option>
+                        {% for agent in agents %}
+                            <option value="{{agent['agent_id']}}">{{agent['name']}}</option>
+                        {% endfor %}
+                        </select>
                     </div>
                     <div class="field__item">
                         <label> Pickup Time </label>
@@ -89,17 +104,12 @@
                             <option value="credit">Credit</option>
                         </select>
                     </div>
-                    <div class="field__item">
-                        <label> Current Status </label>
-                        <select class="field__input" name="status" required>
-                            <option value="" selected disabled>--Please choose an option--</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
                     <div class="field__item" >
-                        <label> Total Penalties </label>
-                        <input type="number" class="field__input" name="penalties" required>
+                        <label> Add-Ons </label>
+                        {% for add in addOns %}
+                        <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}">
+                        <label for="add_ons">{{add['name']}}</label><br>
+                        {% endfor %}
                     </div>
                     <div class="field__item" >
                         <label> Total Cost </label>
@@ -111,12 +121,12 @@
         </div>
         <div class="form_div">
             <form class="form" method="POST" action="/Rentals" id="searchRental">
-                <label for="cars">Filter by rental date:</label>
+                <label for="cars">Filter by pickup date:</label>
                 <fieldset class="form__field">
                     <div class="field__item">
                         <div class="field__item">
-                            <label> Rental Date </label>
-                            <input type="date" class="field__input" name="rental_date">
+                            <label> Pickup Date </label>
+                            <input type="date" class="field__input" name="pickup_date">
                         </div>
                     </div>
                     <input type="submit" value="Search" name="search_rental" class="field__button">
