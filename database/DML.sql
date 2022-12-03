@@ -30,6 +30,10 @@ DELETE FROM Drivers WHERE driver_id = :driver_id_input;
 ----------------------------
 -- select all cars
 SELECT * FROM Locations;
+-- select cities for search feature
+SELECT city FROM Locations;
+-- select specific location for update
+SELECT * FROM Locations WHERE city = %s;
 
 -- create a new car entry
 INSERT INTO Location (city, state, address, zipcode, num_cars) VALUES 
@@ -89,9 +93,18 @@ DELETE FROM Rentals WHERE rental_id = :rental_id_input;
 
 -- select all cars
 SELECT * FROM Cars;
+-- select car of specific id
+SELECT * FROM Cars WHERE car_id = :car_id_input;
+-- select Cars make
+SELECT make FROM Cars;
+-- select all cars filtered by current_availability
+SELECT * FROM Cars WHERE current_availability = :urrent_availability_input;
+-- select all cars filtered by make
+SELECT * FROM Cars WHERE make = :make_input;
 
 -- select foreign key ids
 SELECT * FROM Cars WHERE Cars.location_id = :car_location_id_input;
+SELECT location_id, address, city FROM Locations;
 
 -- create a new car entry
 INSERT INTO Cars (location_id, make, model, year, car_body_type, daily_price, color, license_plate_num, vin, current_mileage, current_availability) VALUES 

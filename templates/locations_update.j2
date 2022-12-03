@@ -1,56 +1,55 @@
 {% extends "base.j2" %}
 {% block content %}
 <div class="main">
-    <h1>Update Location {{location["location_id"]}}</h1> 
-    <div class="container data_table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>location_id</th>
-                    <th>address</th>
-                    <th>city</th>
-                    <th>state</th>
-                    <th>zipcode</th>
-                    <th>num_cars</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                {% for key in location.keys() %} {#for every key in the list of keys for each dict, or in other words, for each data point #}
-                    <td>{{location[key]}}</td> {# make a table cell for each k/v pair(the data point) in the dict#}
-                {% endfor %}
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="form_div">
-        <form class="form" method="POST" action="/Locations/update/{{locations['location_id']}}" id="updateDriver">
-            <fieldset class="form__field">
-                <div class="field__item">
-                    <label> Address </label>
-                    <input type="text" class="field__input" name ="address" value="{{location['address']}}">
-                </div>
-                <div class="field__item">
-                    <label> City </label>
-                    <input type="text" class="field__input" name ="city" value="{{location['city']}}">
-                </div>
-                <div class="field__item">
-                    <label> State </label>
-                    <input type="text" class="field__input" name ="state" value="{{location['state']}}">
-                </div>
-                <div class="field__item">
-                    <label> Zipcode </label>
-                    <input type="number" class="field__input" name ="zip_code" value="{{location['zip_code']}}">
-                </div>
-                <div class="field__item">
-                    <label> Number of Cars </label>
-                    <input type="number" class="field__input" name ="num_cars" value="{{location['num_cars']}}">
-                </div>
-                <input type="submit" value="Update" name="update_location" class="field__button">
-                <input type="submit" value="Cancel" name="cancel_update" class="field__button">
-            </fieldset>
-        </form>
-    </div>
+    <h1>Update Location at {{location["city"]}}</h1>
+        <div class="container data_table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>address</th>
+                        <th>city</th>
+                        <th>state</th>
+                        <th>zip code</th>
+                        <th>car qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    {% for key in location.keys() %}
+                        <td>{{location[key]}}</td>
+                    {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Locations/update/{{location['location_id']}}" id="updateLocation">
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Address </label>
+                        <input type="text" class="field__input" name="address" value="{{location['address']}}" >
+                    </div>
+                    <div class="field__item">
+                        <label> City </label>
+                        <input type="text" class="field__input" name="city" value="{{location['city']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> State </label>
+                        <input type="text" class="field__input" name="state" value="{{location['state']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> Zip Code </label>
+                        <input type="text" class="field__input" name="zipcode" value="{{location['zipcode']}}">
+                    </div>
+                    <div class="field__item">
+                        <label> Car Qty </label>
+                        <input type="text" class="field__input" name="qty" value="{{location['num_cars']}}">
+                    </div>
+                    <input type="submit" value="Update" name="update_location" class="field__button">
+                    <input type="submit" value="Cancel" name="cancel_update" class="field__button">
+                </fieldset>
+            </form>
+        </div>
 </div>
 {% endblock %}

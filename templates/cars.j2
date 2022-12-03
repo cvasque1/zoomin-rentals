@@ -6,208 +6,132 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>car_id</th>
-                    <th>location_id</th>
+                    <th>id</th>
+                    <th>location id</th>
                     <th>make</th>
                     <th>model</th>
                     <th>year</th>
-                    <th>car_body_type</th>
-                    <th>daily_price</th>
+                    <th>body type</th>
+                    <th>daily rate</th>
                     <th>color</th>
-                    <th>license_plate_number</th>
+                    <th>license plate</th>
                     <th>vin</th>
-                    <th>current_mileage</th>
-                    <th>current_availability</th>
+                    <th>mileage</th>
+                    <th>availability</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
+            {% for car in Cars %}
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>BMW</td>
-                    <td>328i</td>
-                    <td>1996</td>
-                    <td>Sedan</td>
-                    <td>50</td>
-                    <td>Black</td>
-                    <td>4UPZ565</td>
-                    <td>WAULF78K89N032914</td>
-                    <td>189000</td>
-                    <td>Unavailable</td>
-                    <td><button class="car_delete">Delete</button></td>
+                {% for key in car.keys() %}
+                    <td>{{car[key]}}</td>
+                {% endfor %}
+                    <td><a href="Cars/update/{{car['car_id']}}">Edit</a></td>
+                    <td><a href="Cars/delete/{{car['car_id']}}" onclick="return confirm('Delete {{car['make']}} {{car['model']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>Ferrari</td>
-                    <td>LaFerrari</td>
-                    <td>2018</td>
-                    <td>Coupe</td>
-                    <td>10000</td>
-                    <td>Red</td>
-                    <td>2RDX156</td>
-                    <td>JH4DA3350GS005185</td>
-                    <td>2000</td>
-                    <td>Available</td>
-                    <td><button class="car_delete">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>Toyota</td>
-                    <td>Corolla</td>
-                    <td>2015</td>
-                    <td>Sedan</td>
-                    <td>25</td>
-                    <td>Blue</td>
-                    <td>5SBQ300</td>
-                    <td>1G4AH51N1K6437778</td>
-                    <td>70000</td>
-                    <td>Unavailable</td>
-                    <td><button class="car_delete">Delete</button></td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div> 
     <div class="container data_forms">
         <div class="form_div">
-            <form class="form" method="POST" action="./" id="form1">
+            <form class="form" method="POST" action="/Cars" id="form1">
+                <label for="cars">Add a Car:</label>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Location ID </label>
-                        <input type="number" class="field__input">
+                        <label> Location </label>
+                        <select class="field__input" name="location">
+                        {% for loc in locations %}
+                            <option value="{{loc['location_id']}}">{{loc['address']}}, {{loc['city']}}</option>
+                        {% endfor %}
+                        </select>
                     </div>
                     <div class="field__item">
                         <label> Make </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="make" required>
                     </div>
                     <div class="field__item">
                         <label> Model </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="model" required>
                     </div>
                     <div class="field__item">
                         <label> Year </label>
-                        <input type="text" class="field__input">
+                        <input type="number" min="1990" max="2023" class="field__input" name="year" required>
                     </div>
                     <div class="field__item">
-                        <label> Car Body Type </label>
-                        <input type="text" class="field__input">
+                        <label> Body Type </label>
+                        <select class="field__input" name="body_type" required>
+                            <option value="Sedan" selected>Sedan</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Minivan">Minivan</option>
+                        </select>
                     </div>
                     <div class="field__item">
                         <label> Daily Price </label>
-                        <input type="number" class="field__input">
+                        <input type="number" class="field__input" name="price" required>
                     </div>
                     <div class="field__item">
                         <label> Color </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="color" required>
                     </div>
                     <div class="field__item">
                         <label> License Plate Number </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="plate" required>
                     </div>
                     <div class="field__item">
                         <label> Vin </label>
-                        <input type="text" class="field__input">
+                        <input type="text" class="field__input" name="vin" required>
                     </div>
                     <div class="field__item">
                         <label> Current Mileage </label>
-                        <input type="number" class="field__input">
+                        <input type="number" class="field__input" name="mileage" required>
                     </div>
                     <div class="field__item">
                         <label> Current Availability </label>
-                        <input type="text" class="field__input">
+                        <select class="field__input" name="availability">
+                            <option value="Available">Available</option>
+                            <option value="Unavailable">Unavailable</option>
+                        </select>
                     </div>
-                    <button class="field__button">
-                        <a href="#" class="field__button">Add</a>
-                    </button>
+                    <input type="submit" value="Add" name="add_car" class="field__button">
                 </fieldset>
             </form>
         </div>
         <div class="form_div">
-            <form class="form" method="POST" action="./" id="form1">
+            <form class="form" method="POST" action="/Cars" id="searchCarMake">
+                <label for="cars">Filter cars by make:</label>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Car ID </label>
-                        <input type="number" class="field__input">
+                        <label> Car Make </label>
+                        <select class="field__input" name="make">
+                        {% for make in makes %}
+                            <option value="{{make['make']}}">{{make['make']}}</option>
+                        {% endfor %}
+                        </select>
                     </div>
-                    <div class="field__item">
-                        <label> Location ID </label>
-                        <input type="number" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Make </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Model </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Year </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Car Body Type </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Daily Price </label>
-                        <input type="number" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Color </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> License Plate Number </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Vin </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Current Mileage </label>
-                        <input type="number" class="field__input">
-                    </div>
-                    <div class="field__item">
-                        <label> Current Availability </label>
-                        <input type="text" class="field__input">
-                    </div>
-                    <button class="field__button">
-                        <a href="#" class="field__button">Update</a>
-                    </button>
+                    <input type="submit" value="Search" name="search_car_make" class="field__button">
+                    <input type="submit" value="Reset" name="reset_search" class="field__button">
                 </fieldset>
             </form>
         </div>
-        <div>
-            <label for="cars">Filter for a car:</label>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Cars" id="searchCarAvailability">
+                <label for="cars">Filter cars by availability:</label>
                 <fieldset class="form__field">
-                Make
-                <select name="Make" id="cars">
-                    <option value="BMW">BMW</option>
-                    <option value="Ferrari">Ferrari</option>
-                    <option value="Toyota">Toyota</option>
-                </select>
-                Model
-                <select name="Model" id="cars">
-                    <option value="328i">328i</option>
-                    <option value="LaFerrari">LaFerrari</option>
-                    <option value="Corolla">Corolla</option>
-                </select>
-                Year    
-                <select name="Year" id="cars">
-                    <option value="1996">1996</option>
-                    <option value="2018">2018</option>
-                    <option value="2015">2015</option>
-                </select>
-                Availability
-                <select name="Availability" id="cars">
-                    <option value="Available">Available</option>
-                    <option value="Unavailable">Unavailable</option>
-                </select>
-            </fieldset>
+                    <div class="field__item">
+                        <label> Availability </label>
+                        <select class="field__input" name="availability">
+                            <option value="Available">Available</option>
+                            <option value="Unavailable">Unavailable</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Search" name="search_car_availability" class="field__button">
+                    <input type="submit" value="Reset" name="reset_search" class="field__button">
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>
