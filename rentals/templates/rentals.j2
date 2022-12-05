@@ -35,8 +35,8 @@
                         {% endfor %}
                     {% endif %}
                     </td>
-                    <td><a href="Rentals/update/{{rental['rental_id']}}">Edit</a></td>
-                    <td><a href="Rentals/delete/{{rental['rental_id']}}" onclick="return confirm('Delete rental:{{rental['rental_id']}} from your records? This action is irreversible.')">Delete</a></td>
+                    <td><a href="Rentals/../update/{{rental['rental_id']}}">Edit</a></td>
+                    <td><a href="Rentals/../delete/{{rental['rental_id']}}" onclick="return confirm('Delete rental:{{rental['rental_id']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>

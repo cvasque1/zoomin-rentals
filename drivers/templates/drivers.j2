@@ -25,8 +25,8 @@
                 {% for key in driver.keys() %}
                     <td>{{driver[key]}}</td>
                 {% endfor %}
-                    <td><a href="Drivers/update/{{driver['driver_id']}}">Edit</a></td>
-                    <td><a href="Drivers/delete/{{driver['driver_id']}}" onclick="return confirm('Delete {{driver['first_name']}} {{driver['last_name']}} from your records? This action is irreversible.')">Delete</a></td>
+                    <td><a href="Drivers/../update/{{driver['driver_id']}}">Edit</a></td>
+                    <td><a href="Drivers/../delete/{{driver['driver_id']}}" onclick="return confirm('Delete {{driver['first_name']}} {{driver['last_name']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>

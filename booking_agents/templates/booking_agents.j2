@@ -20,8 +20,8 @@
                 {% for key in agent.keys() %}
                     <td>{{agent[key]}}</td>
                 {% endfor %}
-                    <td><a href="Booking_Agents/update/{{agent['agent_id']}}">Edit</a></td>
-                    <td><a href="Booking_Agents/delete/{{agent['agent_id']}}" onclick="return confirm('Delete {{agent['first_name']}} {{agent['last_name']}} from your records? This action is irreversible.')">Delete</a></td>
+                    <td><a href="Booking_Agents/../update/{{agent['agent_id']}}">Edit</a></td>
+                    <td><a href="Booking_Agents/../delete/{{agent['agent_id']}}" onclick="return confirm('Delete {{agent['first_name']}} {{agent['last_name']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>

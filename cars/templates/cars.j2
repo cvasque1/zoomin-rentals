@@ -28,8 +28,8 @@
                 {% for key in car.keys() %}
                     <td>{{car[key]}}</td>
                 {% endfor %}
-                    <td><a href="Cars/update/{{car['car_id']}}">Edit</a></td>
-                    <td><a href="Cars/delete/{{car['car_id']}}" onclick="return confirm('Delete {{car['make']}} {{car['model']}} from your records? This action is irreversible.')">Delete</a></td>
+                    <td><a href="Cars/../update/{{car['car_id']}}">Edit</a></td>
+                    <td><a href="Cars/../delete/{{car['car_id']}}" onclick="return confirm('Delete {{car['make']}} {{car['model']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>

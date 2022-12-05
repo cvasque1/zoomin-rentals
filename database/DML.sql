@@ -60,7 +60,7 @@ DELETE FROM Booking_Agents WHERE agent_id = :agent_id_input;
 --------------------------
 ------ RENTALS PAGE ------
 --------------------------
--- select ALL rental for update, left joining foregin keys to display aliases rather than ids
+-- select ALL rental, left joining foregin keys to display aliases rather than ids
 SELECT R.rental_id, CONCAT(D.first_name,' ',D.last_name) as driver, CONCAT(L.address,', ',L.city) as locale, \
     CONCAT(C.make,' ',C.model) as car, IFNULL(CONCAT(A.first_name,' ',A.last_name), '') as agent, \
     R.pickup_time, R.pickup_date, R.return_time, R.return_date, R.payment_type, R.total_cost FROM Rentals AS R \

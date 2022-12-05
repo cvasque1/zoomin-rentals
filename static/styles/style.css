@@ -73,6 +73,10 @@ nav {
     vertical-align: middle;
   }
 
+.homepage {
+    width: 75%;
+    margin: 0 auto;
+}
 
 .data_table {
     display: flex;

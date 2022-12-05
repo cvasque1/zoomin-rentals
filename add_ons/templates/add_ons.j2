@@ -18,7 +18,7 @@
                 {% for key in add.keys() %}
                     <td>{{add[key]}}</td>
                 {% endfor %}
-                    <td><a href="Add_Ons/delete/{{add['add_on_id']}}" onclick="return confirm('Delete {{add['name']}} from your records? This action is irreversible.')">Delete</a></td>
+                    <td><a href="Add_Ons/../delete/{{add['add_on_id']}}" onclick="return confirm('Delete {{add['name']}} from your records? This action is irreversible.')">Delete</a></td>
                 </tr>
             {% endfor %}
             </tbody>
