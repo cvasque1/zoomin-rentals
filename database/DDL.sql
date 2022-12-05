@@ -64,13 +64,13 @@ CREATE OR REPLACE TABLE `Cars` (
     `make` varchar(255) NOT NULL,
     `model` varchar(255) NOT NULL,
     `year` varchar(255) NOT NULL,
-    `car_body_type` varchar(255),
-    `daily_price` int(3),
-    `color` varchar(255),
+    `car_body_type` varchar(255) NOT NULL,
+    `daily_price` int(3) NOT NULL,
+    `color` varchar(255) NOT NULL,
     `license_plate_num` varchar(255) NOT NULL,
     `vin` varchar(255) NOT NULL,
-    `current_mileage` int(6),
-    `current_availability` varchar(255),
+    `current_mileage` int(6) NOT NULL,
+    `current_availability` varchar(255) NOT NULL,
     PRIMARY KEY (`car_id`),
     FOREIGN KEY (`location_id`) REFERENCES `Locations` (`location_id`)
     ON DELETE CASCADE
@@ -83,7 +83,7 @@ CREATE OR REPLACE TABLE `Locations` (
     `city` varchar(255) NOT NULL,
     `state` varchar(255) NOT NULL,
     `zipcode` varchar(10) NOT NULL,
-    `num_cars` int(3),
+    `num_cars` int(3) NOT NULL,
     PRIMARY KEY(`location_id`)
 );
 
@@ -99,7 +99,7 @@ CREATE OR REPLACE TABLE `Add_Ons` (
 CREATE OR REPLACE TABLE `Rentals_Add_Ons` (
     `rental_add_on_id` int(11) NOT NULL AUTO_INCREMENT,
     `rental_id` int(11) NOT NULL,
-    `add_on_id` int(11),
+    `add_on_id` int(11) NOT NULL,
     PRIMARY KEY(`rental_add_on_id`),
     FOREIGN KEY (`rental_id`) REFERENCES `Rentals` (`rental_id`)
     ON DELETE CASCADE,

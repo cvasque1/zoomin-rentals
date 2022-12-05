@@ -3,6 +3,16 @@
 # Adapted and based on:
 # Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#readme
 
+# Citation for the files database/db_connector.py and database/db_credentials:
+# Date: 10/27/2022
+# Copied github: @mlapresta's work from the flask-starter-app:
+# https://github.com/osu-cs340-ecampus/flask-starter-app/tree/master/database
+
+# Citation for general syntactic references for HTML:
+# 10/27/2022
+# Adapted and based on:
+# Source URL: https://developer.mozilla.org/en-US/docs/Web/HTML
+
 from flask import Flask, render_template
 from flask_mysqldb import MySQL
 import os
