@@ -1,3 +1,8 @@
+# Citation for the starting code and route layout of the project:
+# Date: 10/27/2022
+# Adapted and based on:
+# Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app#readme
+
 from flask import Flask, render_template
 from flask_mysqldb import MySQL
 import os
