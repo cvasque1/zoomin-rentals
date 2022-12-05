@@ -29,38 +29,42 @@
     </div>
     <div class="container data_forms">
         <div class="form_div">
-            <form class="form" method="POST" action="/Booking_Agents" id="addAgent">
-                <label for="cars">Add a Booking Agent:</label>
-                <fieldset class="form__field">
-                    <div class="field__item">
-                        <label> First Name </label>
-                        <input type="text" class="field__input" name="first_name" required>
-                    </div>
-                    <div class="field__item">
-                        <label> Last Name </label>
-                        <input type="text" class="field__input" name="last_name" required>
-                    </div>
-                    <div class="field__item">
-                        <label> Email </label>
-                        <input type="text" class="field__input" name="email" required>
-                    </div>
-                    <input type="submit" value="Add" name="add_agent" class="field__button">
-                </fieldset>
-            </form>
-        </div>
-        <div class="form_div">
             <form class="form" method="POST" action="/Booking_Agents" id="searchAgent">
-                <label for="cars">Filter booking agents by last name (partial search allowed):</label>
+                <legend>Search Booking Agents by Last Name</legend>
+                <label for="cars">(partial search allowed)</label>
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> Last Name </label>
                         <input type="text" class="field__input" name="last_name">
                     </div>
-                    <input type="submit" value="Search" name="search_agent" class="field__button">
-                    <input type="submit" value="Reset" name="reset_search" class="field__button">
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Search" name="search_agent" class="field__button">
+                        <input type="submit" value="Reset" name="reset_search" class="field__button">
+                    </div>
                 </fieldset>
             </form>
         </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Booking_Agents" id="addAgent">
+                <legend>Add New Booking Agent</legend>
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> First Name* </label>
+                        <input type="text" class="field__input" name="first_name" placeholder="John" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Last Name* </label>
+                        <input type="text" class="field__input" name="last_name" placeholder="Doe" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Email* </label>
+                        <input type="email" class="field__input" name="email" pattern=".+@zoominrentals\.com" placeholder="jdoe@zoominrentals.com" required>
+                    </div>
+                    <input type="submit" value="Add" name="add_agent" class="field__button">
+                </fieldset>
+            </form>
+        </div>
+        
     </div>
  </div>
  <script>

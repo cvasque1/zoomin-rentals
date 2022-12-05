@@ -43,12 +43,29 @@
         </table>
     </div> 
     <div class="container data_forms">
-        <div class="form_div">
-            <form class="form" method="POST" action="/Rentals" id="form1">
-                <label for="cars">Add a Rental:</label>
+        <div class="form_div search_form">
+            <form class="form" method="POST" action="/Rentals" id="searchRental">
+                <legend>Search Rentals by Pickup Date</legend>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Driver </label>
+                        <div class="field__item">
+                            <label> Pickup Date </label>
+                            <input type="date" class="field__input" name="pickup_date">
+                        </div>
+                    </div>
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Search" name="search_rental" class="field__button">
+                        <input type="submit" value="Reset" name="reset_search" class="field__button">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Rentals" id="form1">
+                <legend>Add New Rental</legend>
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> Driver* </label>
                         <select class="field__input" name="driver" required>
                         {% for d in drivers %}
                             <option value="{{d['driver_id']}}">{{d['name']}}</option>
@@ -56,7 +73,7 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Location </label>
+                        <label> Location* </label>
                         <select class="field__input" name="location" required>
                         {% for loc in locations %}
                             <option value="{{loc['location_id']}}">{{loc['address']}}, {{loc['city']}}</option>
@@ -64,15 +81,15 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Car </label>
+                        <label> Car* </label>
                         <select class="field__input" name="car" required>
                         {% for car in cars %}
-                            <option value="{{car['car_id']}}">{{car['color']}} {{car['make']}} {{car['model']}} - {{car['vin']}}</option>
+                            <option value="{{car['car_id']}}">{{car['make']}} {{car['model']}}</option>
                         {% endfor %}
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Agent </label>
+                        <label> Agent* </label>
                         <select class="field__input" name="agent" >
                             <option value="none" selected>None</option>
                         {% for agent in agents %}
@@ -81,59 +98,49 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Pickup Time </label>
-                        <input type="time" class="field__input" name="pickup_time" min="08:00" max="18:00" required>
+                        <label> Pickup Time* </label>
+                        <input type="time" class="field__input" name="pickup_time" min="08:00" max="18:00" value="08:00" required>
                     </div>
                     <div class="field__item">
-                        <label> Pickup Date </label>
+                        <label> Pickup Date* </label>
                         <input type="date" class="field__input" name="pickup_date" required>
                     </div>
                     <div class="field__item">
-                        <label> Return Time </label>
-                        <input type="time" class="field__input" name="return_time" min="08:00" max="18:00" required>
+                        <label> Return Time* </label>
+                        <input type="time" class="field__input" name="return_time" min="08:00" max="18:00" value="12:00" required>
                     </div>
                     <div class="field__item">
-                        <label> Return Date </label>
+                        <label> Return Date* </label>
                         <input type="date" class="field__input" name="return_date" min="08:00" max="18:00" required>
                     </div>
                     <div class="field__item">
-                        <label> Payment Type </label>
+                        <label> Payment Type* </label>
                         <select class="field__input" name="payment" required>
                             <option value="" select disabled>--Please choose an option--</option>
                             <option value="cash">Cash</option>
                             <option value="credit">Credit</option>
                         </select>
                     </div>
-                    <div class="field__item" >
+                    <div class="field__item field__addons" >
                         <label> Add-Ons </label>
-                        {% for add in addOns %}
-                        <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}">
-                        <label for="add_ons">{{add['name']}}</label><br>
-                        {% endfor %}
+                        <div class="add_ons">
+                            {% for add in addOns %}
+                            <div class="add_on_option">
+                                <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}">
+                                <label for="add_ons">{{add['name']}}</label><br>
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="field__item" >
-                        <label> Total Cost </label>
-                        <input type="number" class="field__input" name="cost" required>
+                        <label> Total Cost* </label>
+                        <input type="number" class="field__input" name="cost" min="0" placeholder="100" required>
                     </div>
                     <input type="submit" value="Add" name="add_rental" class="field__button">
                 </fieldset>
             </form>
         </div>
-        <div class="form_div">
-            <form class="form" method="POST" action="/Rentals" id="searchRental">
-                <label for="cars">Filter by pickup date:</label>
-                <fieldset class="form__field">
-                    <div class="field__item">
-                        <div class="field__item">
-                            <label> Pickup Date </label>
-                            <input type="date" class="field__input" name="pickup_date">
-                        </div>
-                    </div>
-                    <input type="submit" value="Search" name="search_rental" class="field__button">
-                    <input type="submit" value="Reset" name="reset_search" class="field__button">
-                </fieldset>
-            </form>
-        </div>
+        
     </div>
 </div>
 {% endblock %}

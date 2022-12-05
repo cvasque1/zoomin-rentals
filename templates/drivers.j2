@@ -34,58 +34,62 @@
     </div>
     <div class="container data_forms">
         <div class="form_div">
-            <form class="form" method="POST" action="/Drivers" id="addDriver">
-                <label for="cars">Add a Driver:</label>
+            <form class="form" method="POST" action="/Drivers" id="searchDriver">
+                <legend>Search Drivers by Last Name</legend>
+                <label for="cars">(partial search allowed)</label>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> First Name </label>
-                        <input type="text" class="field__input" name="first_name" required>
-                    </div>
-                    <div class="field__item">
                         <label> Last Name </label>
-                        <input type="text" class="field__input" name="last_name" required>
+                        <input type="text" class="field__input" name="last_name" placeholder="Jackson">
+                    </div>
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Search" name="search_driver" class="field__button">
+                        <input type="submit" value="Reset" name="reset_search" class="field__button">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form_div">
+            <form class="form" method="POST" action="/Drivers" id="addDriver">
+                <legend>Add New Driver</legend>
+                <fieldset class="form__field">
+                    <div class="field__item">
+                        <label> First Name* </label>
+                        <input type="text" class="field__input" name="first_name" placeholder="John" required>
                     </div>
                     <div class="field__item">
-                        <label> Email </label>
-                        <input type="text" class="field__input" name="email" required>
+                        <label> Last Name* </label>
+                        <input type="text" class="field__input" name="last_name" placeholder="Doe" required>
                     </div>
                     <div class="field__item">
-                        <label> Phone </label>
-                        <input type="text" class="field__input" name="phone" required>
+                        <label> Email* </label>
+                        <input type="email" class="field__input" name="email" placeholder="jdoe@email.com" required>
                     </div>
                     <div class="field__item">
-                        <label> Street </label>
-                        <input type="text" class="field__input" name="street" required>
+                        <label> Phone* </label>
+                        <input type="text" class="field__input" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-555-5555" required>
                     </div>
                     <div class="field__item">
-                        <label> City </label>
-                        <input type="text" class="field__input" name="city" required>
+                        <label> Street* </label>
+                        <input type="text" class="field__input" name="street" placeholder="1234 Sample St." required>
                     </div>
                     <div class="field__item">
-                        <label> State </label>
-                        <input type="text" class="field__input" name="state" required>
+                        <label> City* </label>
+                        <input type="text" class="field__input" name="city" placeholder="City Name" required>
                     </div>
                     <div class="field__item">
-                        <label> Zipcode </label>
-                        <input type="number" class="field__input" name="zipcode" required>
+                        <label> State* </label>
+                        <input type="text" class="field__input" name="state" pattern="[A-Z]{2}" placeholder="CA" required>
+                    </div>
+                    <div class="field__item">
+                        <label> Zip Code* </label>
+                        <input type="text" class="field__input" name="zipcode" pattern="[0-9]{5}" placeholder="99999" required>
                     </div>
                     <input type="submit" value="Add" name="add_driver" class="field__button">
                 </fieldset>
             </form>
         </div>
-        <div class="form_div">
-            <form class="form" method="POST" action="/Drivers" id="searchDriver">
-                <label for="cars">Filter drivers by last name (partial search allowed):</label>
-                <fieldset class="form__field">
-                    <div class="field__item">
-                        <label> Last Name </label>
-                        <input type="text" class="field__input" name="last_name">
-                    </div>
-                    <input type="submit" value="Search" name="search_driver" class="field__button">
-                    <input type="submit" value="Reset" name="reset_search" class="field__button">
-                </fieldset>
-            </form>
-        </div>
+        
     </div>
  </div>
  <script>

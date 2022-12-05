@@ -2,43 +2,47 @@
 {% block content %}
 <div class="main">
     <h1>Update Rental {{rental['rental_id']}}</h1>
-        <div class="container data_table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Driver</th>
-                        <th>Location</th>
-                        <th>Car</th>
-                        <th>Agent</th>
-                        <th>pickup time</th>
-                        <th>pickup date</th>
-                        <th>return time</th>
-                        <th>return date</th>
-                        <th>payment type</th>
-                        <th>total cost</th>
-                        <th>Add_Ons</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    {% for key in rental.keys() %}
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Driver</th>
+                    <th>Location</th>
+                    <th>Car</th>
+                    <th>Agent</th>
+                    <th>pickup time</th>
+                    <th>pickup date</th>
+                    <th>return time</th>
+                    <th>return date</th>
+                    <th>payment type</th>
+                    <th>total cost</th>
+                    <th>Add-Ons</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for key in rental.keys() %}
+                    {% if key != 'driver_id' and key != 'location_id' and key != 'car_id' and key != 'agent_id' %}
                         <td>{{rental[key]}}</td>
+                    {% endif %}
+                {% endfor %}
+                    <td>
+                    {% for add_on in intersections %}
+                        {{add_on}}<br>
                     {% endfor %}
-                        <td>
-                        {% for add_on in intersections %}
-                            {{add_on}}<br>
-                        {% endfor %}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
         <div class="form_div">
             <form class="form" method="POST" action="/Rentals/update/{{rental['rental_id']}}" id="updateRental">
+                <legend>Update Rental</legend>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Driver </label>
+                        <label> Driver* </label>
                         <select class="field__input" name="driver">
                         {% for d in drivers %}
                             {% if d['driver_id'] == rental['driver_id'] %}
@@ -50,7 +54,7 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Location </label>
+                        <label> Location* </label>
                         <select class="field__input" name="location">
                         {% for loc in locations %}
                             {% if loc['location_id'] == rental['location_id'] %}
@@ -62,19 +66,19 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Car </label>
+                        <label> Car* </label>
                         <select class="field__input" name="car">
                         {% for car in cars %}
                             {% if car['car_id'] == rental['car_id'] %}
-                                <option value="{{car['car_id']}}" selected>{{car['color']}} {{car['make']}} {{car['model']}} - {{car['vin']}}</option>
+                                <option value="{{car['car_id']}}" selected>{{car['make']}} {{car['model']}}</option>
                             {% else %}
-                                <option value="{{car['car_id']}}">{{car['color']}} {{car['make']}} {{car['model']}} - {{car['vin']}}</option>
+                                <option value="{{car['car_id']}}">{{car['make']}} {{car['model']}}</option>
                             {% endif %}
                         {% endfor %}
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Agent </label>
+                        <label> Agent* </label>
                         <select class="field__input" name="agent">
                         {% for agent in agents %}
                             {% if agent['agent_id'] == "none" and rental['agent_id'] == None %}
@@ -88,23 +92,23 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Pickup Time </label>
+                        <label> Pickup Time* </label>
                         <input type="time" class="field__input" name="pickup_time" value="{{rental['pickup_time']}}" min="08:00" max="18:00" required>
                     </div>
                     <div class="field__item">
-                        <label> Pickup Date </label>
+                        <label> Pickup Date* </label>
                         <input type="date" class="field__input" name="pickup_date" value="{{rental['pickup_date']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Return Time </label>
+                        <label> Return Time* </label>
                         <input type="time" class="field__input" name="return_time" value="{{rental['return_time']}}" min="08:00" max="18:00" required>
                     </div>
                     <div class="field__item">
-                        <label> Return Date </label>
+                        <label> Return Date* </label>
                         <input type="date" class="field__input" name="return_date" value="{{rental['return_date']}}" min="08:00" max="18:00" required>
                     </div>
                     <div class="field__item">
-                        <label> Payment Type </label>
+                        <label> Payment Type* </label>
                         <select class="field__input" name="payment" required>
                         {% if rental['payment_type'] == "cash" %}
                             <option value="cash" selected>Cash</option>
@@ -115,27 +119,33 @@
                         {% endif %}
                         </select>
                     </div>
-                    <div class="field__item" >
+                    <div class="field__item field__addons" >
                         <label> Add-Ons </label>
-                        {% for add in addOns %}
-                            {% if add['name'] in intersections %}
-                                <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}" checked>
-                                <label for="add_ons">{{add['name']}}</label><br>
-                            {% else %}
-                                <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}">
-                                <label for="add_ons">{{add['name']}}</label><br>
-                            {% endif %}
-                        {% endfor %}
+                        <div class="add_ons">
+                            {% for add in addOns %}
+                            <div class="add_on_option">
+                                {% if add['name'] in intersections %}
+                                    <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}" checked>
+                                    <label for="add_ons">{{add['name']}}</label><br>
+                                {% else %}
+                                    <input type="checkbox" name="add_ons" value="{{add['add_on_id']}}">
+                                    <label for="add_ons">{{add['name']}}</label><br>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="field__item" >
-                        <label> Total Cost </label>
-                        <input type="number" class="field__input" name="cost" value="{{rental['total_cost']}}" required>
+                        <label> Total Cost* </label>
+                        <input type="number" class="field__input" name="cost" min="0" placeholder="100" value="{{rental['total_cost']}}" required>
                     </div>
-                    <input type="submit" value="Update" name="update_rental" class="field__button">
-                    <input type="submit" value="Cancel" name="cancel_rental" class="field__button">
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Update" name="update_rental" class="field__button">
+                        <input type="submit" value="Cancel" name="cancel_rental" class="field__button" formnovalidate>
+                    </div>
                 </fieldset>
             </form>
         </div>
-        
+    </div>
 </div>
 {% endblock %}

@@ -2,44 +2,49 @@
 {% block content %}
 <div class="main">
     <h1>Update {{agent["first_name"]}} {{agent["last_name"]}}</h1>
-        <div class="container data_table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>first name</th>
-                        <th>last name</th>
-                        <th>email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    {% for key in agent.keys() %}
-                        <td>{{agent[key]}}</td>
-                    {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                    <th>email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for key in agent.keys() %}
+                    <td>{{agent[key]}}</td>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
         <div class="form_div">
             <form class="form" method="post" action="/Booking_Agents/update/{{agent['agent_id']}}" id="updateAgent">
+                <legend>Update Booking Agent</legend>
                 <fieldset class="form__field">
                     <div class="field__item">
                         <label> First Name </label>
-                        <input type="text" class="field__input" name="first_name" value="{{agent['first_name']}}" >
+                        <input type="text" class="field__input" name="first_name" placeholder="John" value="{{agent['first_name']}}" required>
                     </div>
                     <div class="field__item">
                         <label> Last Name </label>
-                        <input type="text" class="field__input" name="last_name" value="{{agent['last_name']}}">
+                        <input type="text" class="field__input" name="last_name" placeholder="Doe" value="{{agent['last_name']}}" required>
                     </div>
                     <div class="field__item">
                         <label> Email </label>
-                        <input type="text" class="field__input" name="email" value="{{agent['email']}}">
+                        <input type="text" class="field__input" name="email" pattern=".+@zoominrentals\.com" placeholder="jdoe@zoominrentals.com" value="{{agent['email']}}" required>
                     </div>
-                    <input type="submit" value="Update" name="update_agent" class="field__button">
-                    <input type="submit" value="Cancel" name="cancel_update" class="field__button">
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Update" name="update_agent" class="field__button">
+                        <input type="submit" value="Cancel" name="cancel_update" class="field__button" formnovalidate>
+                    </div>
                 </fieldset>
             </form>
         </div>
+    </div>
 </div>
 {% endblock %}

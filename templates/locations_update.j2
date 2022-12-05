@@ -2,54 +2,59 @@
 {% block content %}
 <div class="main">
     <h1>Update Location at {{location["city"]}}</h1>
-        <div class="container data_table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>address</th>
-                        <th>city</th>
-                        <th>state</th>
-                        <th>zip code</th>
-                        <th>car qty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    {% for key in location.keys() %}
-                        <td>{{location[key]}}</td>
-                    {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>street</th>
+                    <th>city</th>
+                    <th>state</th>
+                    <th>zip code</th>
+                    <th>car qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for key in location.keys() %}
+                    <td>{{location[key]}}</td>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
         <div class="form_div">
             <form class="form" method="POST" action="/Locations/update/{{location['location_id']}}" id="updateLocation">
+                <legend>Update Location</legend>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Address </label>
-                        <input type="text" class="field__input" name="address" value="{{location['address']}}" >
+                        <label> Street* </label>
+                        <input type="text" class="field__input" name="address" placeholder="1234 Sample St." value="{{location['address']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> City </label>
-                        <input type="text" class="field__input" name="city" value="{{location['city']}}">
+                        <label> City* </label>
+                        <input type="text" class="field__input" name="city" placeholder="City Name" value="{{location['city']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> State </label>
-                        <input type="text" class="field__input" name="state" value="{{location['state']}}">
+                        <label> State* </label>
+                        <input type="text" class="field__input" name="state" pattern="[A-Z]{2}" placeholder="CA" value="{{location['state']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Zip Code </label>
-                        <input type="text" class="field__input" name="zipcode" value="{{location['zipcode']}}">
+                        <label> Zip Code* </label>
+                        <input type="text" class="field__input" name="zipcode" pattern="[0-9]{5}" placeholder="99999" value="{{location['zipcode']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Car Qty </label>
-                        <input type="text" class="field__input" name="qty" value="{{location['num_cars']}}">
+                        <label> Car Qty* </label>
+                        <input type="text" class="field__input" name="qty" min="0" placeholder="20" value="{{location['num_cars']}}" required>
                     </div>
-                    <input type="submit" value="Update" name="update_location" class="field__button">
-                    <input type="submit" value="Cancel" name="cancel_update" class="field__button">
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Update" name="update_location" class="field__button">
+                        <input type="submit" value="Cancel" name="cancel_update" class="field__button" formnovalidate>
+                    </div>
                 </fieldset>
             </form>
         </div>
+    </div>
 </div>
 {% endblock %}

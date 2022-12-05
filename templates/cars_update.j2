@@ -2,38 +2,42 @@
 {% block content %}
 <div class="main">
     <h1>Update Car {{car["make"]}} {{car["model"]}}</h1>
-        <div class="container data_table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>location id</th>
-                        <th>make</th>
-                        <th>model</th>
-                        <th>year</th>
-                        <th>body type</th>
-                        <th>daily rate</th>
-                        <th>color</th>
-                        <th>license</th>
-                        <th>vin</th>
-                        <th>mileage</th>
-                        <th>availability</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    {% for key in car.keys() %}
+    <div class="container data_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>location id</th>
+                    <th>make</th>
+                    <th>model</th>
+                    <th>year</th>
+                    <th>body type</th>
+                    <th>daily rate</th>
+                    <th>color</th>
+                    <th>license plate</th>
+                    <th>vin</th>
+                    <th>mileage</th>
+                    <th>availability</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for key in car.keys() %}
+                    {% if key != 'location_id' %}
                         <td>{{car[key]}}</td>
-                    {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    {% endif %}
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container data_forms">
         <div class="form_div">
             <form class="form" method="POST" action="/Cars/update/{{car['car_id']}}" id="updateCar">
+                <legend>Update Car</legend>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Location </label>
+                        <label> Location* </label>
                         <select class="field__input" name="location">
                         {% for loc in locations %}
                             {% if loc['location_id'] == car['location_id'] %}
@@ -45,19 +49,19 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Make </label>
-                        <input type="text" class="field__input" name="make" value="{{car['make']}}" required>
+                        <label> Make* </label>
+                        <input type="text" class="field__input" name="make" placeholder="Kia" value="{{car['make']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Model </label>
-                        <input type="text" class="field__input" name="model" value="{{car['model']}}" required>
+                        <label> Model* </label>
+                        <input type="text" class="field__input" name="model" placeholder="Optima" value="{{car['model']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Year </label>
-                        <input type="number" min="1990" max="2023" class="field__input" name="year" value="{{car['year']}}" required>
+                        <label> Year* </label>
+                        <input type="number" min="1990" max="2023" class="field__input" name="year" placeholder="1990-2023" value="{{car['year']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Body Type </label>
+                        <label> Body Type* </label>
                         <select class="field__input" name="body_type" required>
                         {% for body in body_types %}
                             {% if body == car['car_body_type'] %}
@@ -69,27 +73,27 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Daily Rate </label>
-                        <input type="number" class="field__input" name="price" value="{{car['daily_price']}}" required>
+                        <label> Daily Rate* </label>
+                        <input type="number" class="field__input" name="price" min="0" placeholder="50" value="{{car['daily_price']}}" required>
                     </div>
                     <div class="field__item">
-                        <label> Color </label>
-                        <input type="text" class="field__input" name="color" value="{{car['color']}}"required>
+                        <label> Color* </label>
+                        <input type="text" class="field__input" name="color"  placeholder="Silver" value="{{car['color']}}"required>
                     </div>
                     <div class="field__item">
-                        <label> License Plate Number </label>
-                        <input type="text" class="field__input" name="plate" value="{{car['license_plate_num']}}"required>
+                        <label> License Plate Number* </label>
+                        <input type="text" class="field__input" name="plate" placeholder="5AMPL3S" value="{{car['license_plate_num']}}"required>
                     </div>
                     <div class="field__item">
-                        <label> Vin </label>
-                        <input type="text" class="field__input" name="vin" value="{{car['vin']}}"required>
+                        <label> Vin* </label>
+                        <input type="text" class="field__input" name="vin" minlength="17" maxlength="17" placeholder="JH4DA3350GS005185" value="{{car['vin']}}"required>
                     </div>
                     <div class="field__item">
-                        <label> Current Mileage </label>
-                        <input type="number" class="field__input" name="mileage" value="{{car['current_mileage']}}"required>
+                        <label> Current Mileage* </label>
+                        <input type="number" class="field__input" name="mileage" min="0" placeholder="10000" value="{{car['current_mileage']}}"required>
                     </div>
                     <div class="field__item">
-                        <label> Current Availability </label>
+                        <label> Current Availability* </label>
                         <select class="field__input" name="availability" value="{{car['current_availability']}}">
                         {% if "Available" == car['current_availability'] %}
                             <option value="Available" selected>Available</option>
@@ -100,10 +104,13 @@
                         {% endif %}
                         </select>
                     </div>
-                    <input type="submit" value="Update" name="update_car" class="field__button">
-                    <input type="submit" value="Cancel" name="cancel_update" class="field__button">
+                    <div class="multiple_buttons">
+                        <input type="submit" value="Update" name="update_car" class="field__button">
+                        <input type="submit" value="Cancel" name="cancel_update" class="field__button" formnovalidate>
+                    </div>
                 </fieldset>
             </form>
         </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 header {
     border-bottom: 1px black solid;
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -121,9 +121,20 @@ table th {
     text-transform: capitalize;
 }
 
+table th {
+    border: 1px solid #ffffff6e;
+}
+
+table td {
+    border-left: 1px solid #00000017;
+}
+
+
 .data_forms {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 form {
@@ -133,4 +144,110 @@ form {
     align-items: center;
     margin: 20px;
 }
+
+.form_div {
+    box-shadow: 0 6px 12px -2px rgb(50 50 93 / 25%), 0 3px 7px -3px rgb(0 0 0 / 30%);
+    border-radius: 5px;
+    border-collapse: collapse;
+    margin: 10px;
+    padding: 0;
+    width: 540px;
+}
+
+.form__field { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    border: 0;
+}
+
+.field__item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 400px;
+}
+
+.field__button {
+    color: white;
+    font-weight: 500;
+    font-size: 1em;
+    background-color: #6772e5;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 30px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer
+}
+
+.field__button:hover {
+    background-color: #6772e5ea;
+}
+
+input, select {
+    height: 30px;
+    cursor: text;
+}
+
+select {
+    cursor: pointer;
+}
+
+.multiple_buttons {
+    display: flex;
+
+}
+
+.multiple_buttons > input[type=submit] {
+    margin: 20px 20px 0;
+}
+
+.field__item > label {
+
+    margin-bottom: 5px;
+}
+
+legend {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+input {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 400;
+    padding-left: 10px;
+}
+
+.search_forms {
+    display: flex;
+}
+
+.marquee {
+    width: 100%;
+    align-self: center;
+    position: fixed;
+    bottom: 0;
+}
+
+.main {
+    margin: 0 auto;
+}
+
+.add_ons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.add_on_option {
+    display: flex;
+    align-items: center;
+    margin: 0 2px;
+}
+
+
+
 

@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>location id</th>
+                    <th>location</th>
                     <th>make</th>
                     <th>model</th>
                     <th>year</th>
@@ -36,32 +36,71 @@
         </table>
     </div> 
     <div class="container data_forms">
+        <div class="search_forms">
+            <div class="form_div">
+                <form class="form" method="POST" action="/Cars" id="searchCarMake">
+                    <legend>Search Cars by Make</legend>
+                    <fieldset class="form__field">
+                        <div class="field__item">
+                            <label> Car Make </label>
+                            <select class="field__input" name="make">
+                            {% for make in makes %}
+                                <option value="{{make['make']}}">{{make['make']}}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        <div class="multiple_buttons">
+                            <input type="submit" value="Search" name="search_car_make" class="field__button">
+                            <input type="submit" value="Reset" name="reset_search" class="field__button">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="form_div">
+                <form class="form" method="POST" action="/Cars" id="searchCarAvailability">
+                    <legend>Search Cars by Availability</legend>
+                    <fieldset class="form__field">
+                        <div class="field__item">
+                            <label> Availability </label>
+                            <select class="field__input" name="availability">
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </div>
+                        <div class="multiple_buttons">
+                            <input type="submit" value="Search" name="search_car_availability" class="field__button">
+                            <input type="submit" value="Reset" name="reset_search" class="field__button">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
         <div class="form_div">
             <form class="form" method="POST" action="/Cars" id="form1">
-                <label for="cars">Add a Car:</label>
+                <legend>Add New Car</legend>
                 <fieldset class="form__field">
                     <div class="field__item">
-                        <label> Location </label>
-                        <select class="field__input" name="location">
+                        <label> Location* </label>
+                        <select class="field__input" name="location" required>
                         {% for loc in locations %}
                             <option value="{{loc['location_id']}}">{{loc['address']}}, {{loc['city']}}</option>
                         {% endfor %}
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Make </label>
-                        <input type="text" class="field__input" name="make" required>
+                        <label> Make* </label>
+                        <input type="text" class="field__input" name="make" placeholder="Kia" required>
                     </div>
                     <div class="field__item">
-                        <label> Model </label>
-                        <input type="text" class="field__input" name="model" required>
+                        <label> Model* </label>
+                        <input type="text" class="field__input" name="model" placeholder="Optima" required>
                     </div>
                     <div class="field__item">
-                        <label> Year </label>
-                        <input type="number" min="1990" max="2023" class="field__input" name="year" required>
+                        <label> Year* </label>
+                        <input type="number" min="1990" max="2023" class="field__input" placeholder="1990-2023" name="year" required>
                     </div>
                     <div class="field__item">
-                        <label> Body Type </label>
+                        <label> Body Type* </label>
                         <select class="field__input" name="body_type" required>
                             <option value="Sedan" selected>Sedan</option>
                             <option value="Coupe">Coupe</option>
@@ -70,27 +109,27 @@
                         </select>
                     </div>
                     <div class="field__item">
-                        <label> Daily Price </label>
-                        <input type="number" class="field__input" name="price" required>
+                        <label> Daily Price* </label>
+                        <input type="number" class="field__input" min="0" placeholder="50" name="price" required>
                     </div>
                     <div class="field__item">
-                        <label> Color </label>
-                        <input type="text" class="field__input" name="color" required>
+                        <label> Color* </label>
+                        <input type="text" class="field__input" name="color" placeholder="Silver" required>
                     </div>
                     <div class="field__item">
-                        <label> License Plate Number </label>
-                        <input type="text" class="field__input" name="plate" required>
+                        <label> License Plate Number* </label>
+                        <input type="text" class="field__input" name="plate" placeholder="5AMPL3S" required>
                     </div>
                     <div class="field__item">
-                        <label> Vin </label>
-                        <input type="text" class="field__input" name="vin" required>
+                        <label> Vin* </label>
+                        <input type="text" class="field__input" minlength="17" maxlength="17" placeholder="JH4DA3350GS005185" name="vin" required>
                     </div>
                     <div class="field__item">
-                        <label> Current Mileage </label>
-                        <input type="number" class="field__input" name="mileage" required>
+                        <label> Current Mileage* </label>
+                        <input type="number" class="field__input" min="0" name="mileage" placeholder="10000" required>
                     </div>
                     <div class="field__item">
-                        <label> Current Availability </label>
+                        <label> Current Availability* </label>
                         <select class="field__input" name="availability">
                             <option value="Available">Available</option>
                             <option value="Unavailable">Unavailable</option>
@@ -100,39 +139,7 @@
                 </fieldset>
             </form>
         </div>
-        <div class="form_div">
-            <form class="form" method="POST" action="/Cars" id="searchCarMake">
-                <label for="cars">Filter cars by make:</label>
-                <fieldset class="form__field">
-                    <div class="field__item">
-                        <label> Car Make </label>
-                        <select class="field__input" name="make">
-                        {% for make in makes %}
-                            <option value="{{make['make']}}">{{make['make']}}</option>
-                        {% endfor %}
-                        </select>
-                    </div>
-                    <input type="submit" value="Search" name="search_car_make" class="field__button">
-                    <input type="submit" value="Reset" name="reset_search" class="field__button">
-                </fieldset>
-            </form>
-        </div>
-        <div class="form_div">
-            <form class="form" method="POST" action="/Cars" id="searchCarAvailability">
-                <label for="cars">Filter cars by availability:</label>
-                <fieldset class="form__field">
-                    <div class="field__item">
-                        <label> Availability </label>
-                        <select class="field__input" name="availability">
-                            <option value="Available">Available</option>
-                            <option value="Unavailable">Unavailable</option>
-                        </select>
-                    </div>
-                    <input type="submit" value="Search" name="search_car_availability" class="field__button">
-                    <input type="submit" value="Reset" name="reset_search" class="field__button">
-                </fieldset>
-            </form>
-        </div>
+        
     </div>
 </div>
 {% endblock %}

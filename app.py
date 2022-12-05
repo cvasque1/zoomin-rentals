@@ -41,18 +41,21 @@ def drivers():
             city_input = request.form["city"]
             state_input = request.form["state"]
             zipcode_input = request.form["zipcode"]
-            query_parameters = [first_name_input,last_name_input,email_input,phone_input,street_input,city_input,state_input,zipcode_input]
-
-            query = "INSERT INTO Drivers (first_name, last_name, email, phone, street, city, state, zipcode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+            
+            query_parameters = [first_name_input,last_name_input,email_input,phone_input,
+                                street_input,city_input,state_input,zipcode_input]
+            query = "INSERT INTO Drivers (first_name, last_name, email, phone, street, city, state, zipcode) \
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             return redirect("/Drivers")
+
         elif request.form.get("search_driver"):
             last_name_input = request.form["last_name"]
             query = "SELECT * FROM Drivers WHERE last_name LIKE %s;"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(last_name_input + '%',))
             results = cursor.fetchall()
             return render_template('drivers.j2', Drivers=results)
-    # else:
+
     query = "SELECT * FROM Drivers;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -71,18 +74,21 @@ def drivers_update(id):
             city_input = request.form["city"]
             state_input = request.form["state"]
             zipcode_input = request.form["zipcode"]
-            query_parameters = [first_name_input,last_name_input,email_input,phone_input,street_input,city_input,state_input,zipcode_input]
+            
+            query_parameters = [first_name_input,last_name_input,email_input,phone_input,
+                                street_input,city_input,state_input,zipcode_input]
             query_parameters.append(id)
-
-            query = "UPDATE Drivers SET Drivers.first_name = %s, Drivers.last_name = %s, Drivers.email = %s, Drivers.phone = %s, Drivers.street = %s, Drivers.city = %s, Drivers.state = %s, Drivers.zipcode = %s WHERE Drivers.driver_id = %s"
+            query = "UPDATE Drivers SET Drivers.first_name = %s, Drivers.last_name = %s, Drivers.email = %s, \
+                        Drivers.phone = %s, Drivers.street = %s, Drivers.city = %s, Drivers.state = %s, \
+                        Drivers.zipcode = %s WHERE Drivers.driver_id = %s"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             
         return redirect("/Drivers")
-    else:
-        query = "SELECT * FROM Drivers WHERE driver_id = %s;"
-        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
-        results = cursor.fetchall()
-        return render_template('drivers_update.j2', driver=results[0])
+
+    query = "SELECT * FROM Drivers WHERE driver_id = %s;"
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
+    results = cursor.fetchall()
+    return render_template('drivers_update.j2', driver=results[0])
 
 
 @app.route('/Drivers/delete/<int:id>')
@@ -90,7 +96,6 @@ def drivers_delete(id):
     query = "DELETE FROM Drivers WHERE driver_id = %s;"
     cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
     return redirect("/Drivers")
-
 
 
 ############################
@@ -103,18 +108,19 @@ def booking_agents():
             first_name_input = request.form["first_name"]
             last_name_input = request.form["last_name"]
             email_input = request.form["email"]
-            query_parameters = [first_name_input,last_name_input,email_input]
 
+            query_parameters = [first_name_input,last_name_input,email_input]
             query = "INSERT INTO Booking_Agents (first_name, last_name, email) VALUES (%s, %s, %s);"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             return redirect("/Booking_Agents")
+
         elif request.form.get("search_agent"):
             last_name_input = request.form["last_name"]
             query = "SELECT * FROM Booking_Agents WHERE last_name LIKE %s;"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(last_name_input + '%',))
             results = cursor.fetchall()
             return render_template('booking_agents.j2', Agents=results)
-    # else:
+    
     query = "SELECT * FROM Booking_Agents;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -128,10 +134,11 @@ def booking_agents_update(id):
             first_name_input = request.form["first_name"]
             last_name_input = request.form["last_name"]
             email_input = request.form["email"]
+            
             query_parameters = [first_name_input,last_name_input,email_input]
             query_parameters.append(id)
-
-            query = "UPDATE Booking_Agents SET Booking_Agents.first_name = %s, Booking_Agents.last_name = %s, Booking_Agents.email = %s WHERE Booking_Agents.agent_id = %s"
+            query = "UPDATE Booking_Agents SET Booking_Agents.first_name = %s, Booking_Agents.last_name = %s, \
+                        Booking_Agents.email = %s WHERE Booking_Agents.agent_id = %s"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             
         return redirect("/Booking_Agents")
@@ -149,7 +156,6 @@ def booking_agents_delete(id):
     return redirect("/Booking_Agents")
     
     
-
 ######################
 ### Rentals Routes ###
 ######################
@@ -186,10 +192,14 @@ def rentals():
             add_ons_input = request.form.getlist('add_ons')
 
             if agent_input == "none":
-                query_parameters = [driver_input,location_input,car_input,None,pickup_time_input,pickup_date_input,return_time_input,return_date_input,payment_input,cost_input]
+                query_parameters = [driver_input,location_input,car_input,None,pickup_time_input,pickup_date_input,
+                                    return_time_input,return_date_input,payment_input,cost_input]
             else:
-                query_parameters = [driver_input,location_input,car_input,agent_input,pickup_time_input,pickup_date_input,return_time_input,return_date_input,payment_input,cost_input]
-            query = "INSERT INTO Rentals (driver_id, location_id, car_id, agent_id, pickup_time, pickup_date, return_time, return_date, payment_type, total_cost) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+                query_parameters = [driver_input,location_input,car_input,agent_input,pickup_time_input,
+                                    pickup_date_input,return_time_input,return_date_input,payment_input,cost_input]
+            query = "INSERT INTO Rentals (driver_id, location_id, car_id, agent_id, pickup_time, pickup_date, \
+                        return_time, return_date, payment_type, total_cost) \
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             rentalID = cursor.lastrowid
             if len(add_ons_input) > 0:
@@ -198,37 +208,52 @@ def rentals():
                     query = "INSERT INTO Rentals_Add_Ons (rental_id, add_on_id) VALUES (%s, %s);"
                     cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             return redirect("/Rentals")
+
         elif request.form.get("search_rental"):
             pickup_date_input = request.form["pickup_date"]
-            query = "SELECT * FROM Rentals WHERE pickup_date = %s ORDER BY rental_id ASC;"
+            query = "SELECT R.rental_id, CONCAT(D.first_name,' ',D.last_name) as driver, CONCAT(L.address,', ',L.city) as locale, \
+                        CONCAT(C.make,' ',C.model) as car, IFNULL(CONCAT(A.first_name,' ',A.last_name), '') as agent, \
+                        R.pickup_time, R.pickup_date, R.return_time, R.return_date, R.payment_type, R.total_cost FROM Rentals AS R \
+                    LEFT JOIN Drivers AS D ON R.driver_id = D.driver_id \
+                    LEFT JOIN Locations AS L ON R.location_id = L.location_id \
+                    LEFT JOIN Cars AS C ON R.car_id = C.car_id \
+                    LEFT JOIN Booking_Agents AS A ON R.agent_id = A.agent_id \
+                    WHERE R.pickup_date = %s ORDER BY rental_id ASC"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[pickup_date_input])
             resultsTable = cursor.fetchall()
             query = "SELECT Rentals_Add_Ons.rental_id, Add_Ons.name \
-                FROM Rentals_Add_Ons \
-                INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
-                ORDER BY rental_id ASC;"
+                    FROM Rentals_Add_Ons \
+                    INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
+                    ORDER BY rental_id ASC;"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
             intersections = defaultdict(list)
             for r in results:
                 intersections[r['rental_id']].append(r['name'])
+            return render_template('rentals.j2', Rentals=resultsTable, locations=searchResultsLoc, cars=searchResultsCar,
+                                     drivers=searchResultsDriver, addOns=searchResultsAddOn, intersections=intersections)
 
-            return render_template('rentals.j2', Rentals=resultsTable, locations=searchResultsLoc, cars=searchResultsCar, drivers=searchResultsDriver, addOns=searchResultsAddOn, intersections=intersections)
-    # else:
-    query = "SELECT * FROM Rentals"
+    query = "SELECT R.rental_id, CONCAT(D.first_name,' ',D.last_name) as driver, CONCAT(L.address,', ',L.city) as locale, \
+                CONCAT(C.make,' ',C.model) as car, IFNULL(CONCAT(A.first_name,' ',A.last_name), '') as agent, \
+                R.pickup_time, R.pickup_date, R.return_time, R.return_date, R.payment_type, R.total_cost FROM Rentals AS R \
+            LEFT JOIN Drivers AS D ON R.driver_id = D.driver_id \
+            LEFT JOIN Locations AS L ON R.location_id = L.location_id \
+            LEFT JOIN Cars AS C ON R.car_id = C.car_id \
+            LEFT JOIN Booking_Agents AS A ON R.agent_id = A.agent_id;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     resultsTable = cursor.fetchall()
     query = "SELECT Rentals_Add_Ons.rental_id, Add_Ons.name \
-        FROM Rentals_Add_Ons \
-        INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
-        ORDER BY rental_id ASC;"
+            FROM Rentals_Add_Ons \
+            INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
+            ORDER BY rental_id ASC;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     intersections = defaultdict(list)
     for r in results:
         intersections[r['rental_id']].append(r['name'])
-
-    return render_template('rentals.j2', Rentals=resultsTable, locations=searchResultsLoc, cars=searchResultsCar, drivers=searchResultsDriver, agents=searchResultsAgent, addOns=searchResultsAddOn, intersections=intersections)
+    return render_template('rentals.j2', Rentals=resultsTable, locations=searchResultsLoc, cars=searchResultsCar, 
+                            drivers=searchResultsDriver, agents=searchResultsAgent, addOns=searchResultsAddOn, 
+                            intersections=intersections)
 
 
 @app.route('/Rentals/update/<int:id>', methods=["POST", "GET"])
@@ -265,21 +290,32 @@ def rentals_update(id):
             return_date_input = request.form["return_date"]
             payment_input = request.form["payment"]
             cost_input = request.form["cost"]
+
             if agent_input == "none":
-                query_parameters = [driver_input,location_input,car_input,pickup_time_input,pickup_date_input,return_time_input,return_date_input,payment_input,cost_input]
+                query_parameters = [driver_input,location_input,car_input,pickup_time_input,pickup_date_input,
+                                    return_time_input,return_date_input,payment_input,cost_input]
                 query_parameters.append(id)
-                query = "UPDATE Rentals SET Rentals.driver_id = %s, Rentals.location_id = %s, Rentals.car_id = %s, Rentals.agent_id = NULL, Rentals.pickup_time = %s, Rentals.pickup_date = %s, Rentals.return_time = %s, Rentals.return_date = %s, Rentals.payment_type = %s, Rentals.total_cost = %s WHERE Rentals.rental_id = %s"
+                query = "UPDATE Rentals SET Rentals.driver_id = %s, Rentals.location_id = %s, Rentals.car_id = %s, \
+                            Rentals.agent_id = NULL, Rentals.pickup_time = %s, Rentals.pickup_date = %s, \
+                            Rentals.return_time = %s, Rentals.return_date = %s, Rentals.payment_type = %s, Rentals.total_cost = %s \
+                        WHERE Rentals.rental_id = %s"
+
             else:
-                query_parameters = [driver_input,location_input,car_input,agent_input,pickup_time_input,pickup_date_input,return_time_input,return_date_input,payment_input,cost_input]
+                query_parameters = [driver_input,location_input,car_input,agent_input,pickup_time_input,
+                                    pickup_date_input,return_time_input,return_date_input,payment_input,cost_input]
                 query_parameters.append(id)
-                query = "UPDATE Rentals SET Rentals.driver_id = %s, Rentals.location_id = %s, Rentals.car_id = %s, Rentals.agent_id = %s, Rentals.pickup_time = %s, Rentals.pickup_date = %s, Rentals.return_time = %s, Rentals.return_date = %s, Rentals.payment_type = %s, Rentals.total_cost = %s WHERE Rentals.rental_id = %s"
+                query = "UPDATE Rentals SET Rentals.driver_id = %s, Rentals.location_id = %s, Rentals.car_id = %s, \
+                            Rentals.agent_id = %s, Rentals.pickup_time = %s, Rentals.pickup_date = %s, \
+                            Rentals.return_time = %s, Rentals.return_date = %s, Rentals.payment_type = %s, Rentals.total_cost = %s \
+                        WHERE Rentals.rental_id = %s"
+
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             add_ons_input = request.form.getlist('add_ons')
             query = "SELECT Rentals_Add_Ons.add_on_id \
-                FROM Rentals_Add_Ons \
-                INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
-                WHERE Rentals_Add_Ons.rental_id = %s \
-                ORDER BY rental_id ASC;"
+                    FROM Rentals_Add_Ons \
+                    INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
+                    WHERE Rentals_Add_Ons.rental_id = %s \
+                    ORDER BY rental_id ASC;"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
             resultsAddOns = cursor.fetchall()
             old_add_ons_input = [str(addOn['add_on_id']) for addOn in resultsAddOns]
@@ -296,24 +332,31 @@ def rentals_update(id):
 
         return redirect("/Rentals")
     
-    query = "SELECT * FROM Rentals WHERE rental_id = %s"
+    query = "SELECT R.rental_id, R.driver_id, CONCAT(D.first_name,' ',D.last_name) as driver, R.location_id, \
+                CONCAT(L.address,', ',L.city) as locale, R.car_id, CONCAT(C.make,' ',C.model) as car, R.agent_id, \
+                IFNULL(CONCAT(A.first_name,' ',A.last_name), '') as agent, R.pickup_time, R.pickup_date, \
+                R.return_time, R.return_date, R.payment_type, R.total_cost FROM Rentals AS R \
+            LEFT JOIN Drivers AS D ON R.driver_id = D.driver_id \
+            LEFT JOIN Locations AS L ON R.location_id = L.location_id \
+            LEFT JOIN Cars AS C ON R.car_id = C.car_id \
+            LEFT JOIN Booking_Agents AS A ON R.agent_id = A.agent_id \
+            WHERE R.rental_id = %s;"
     cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
     resultsTable = cursor.fetchall()
     query = "SELECT Rentals_Add_Ons.rental_id, Add_Ons.name \
-        FROM Rentals_Add_Ons \
-        INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
-        WHERE Rentals_Add_Ons.rental_id = %s \
-        ORDER BY rental_id ASC;"
+            FROM Rentals_Add_Ons \
+            INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
+            WHERE Rentals_Add_Ons.rental_id = %s \
+            ORDER BY rental_id ASC;"
     cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
     resultsAddOns = cursor.fetchall()
     intersections = set()
     for addOn in resultsAddOns:
         intersections.add(addOn['name'])
     
-    return render_template('rentals_update.j2', rental=resultsTable[0], locations=searchResultsLoc, cars=searchResultsCar, drivers=searchResultsDriver, agents=searchResultsAgent, addOns=searchResultsAddOn, intersections=intersections)
-
-
-
+    return render_template('rentals_update.j2', rental=resultsTable[0], locations=searchResultsLoc, 
+        cars=searchResultsCar, drivers=searchResultsDriver, agents=searchResultsAgent, 
+        addOns=searchResultsAddOn, intersections=intersections)
 
 
 @app.route('/Rentals/delete/<int:id>')
@@ -328,7 +371,8 @@ def rentals_delete(id):
 #############################
 @app.route('/Rentals_Add_Ons')
 def rentals_add_ons():
-    query = "SELECT Rentals_Add_Ons.rental_add_on_id AS id, Rentals.rental_id AS 'Rental Id', Add_Ons.add_on_id AS 'Add-On Id', Add_Ons.name AS 'Add-On Name' \
+    query = "SELECT Rentals_Add_Ons.rental_add_on_id AS id, Rentals.rental_id AS 'Rental Id', \
+                Add_Ons.add_on_id AS 'Add-On Id', Add_Ons.name AS 'Add-On Name' \
             FROM Rentals_Add_Ons \
             INNER JOIN Add_Ons ON Rentals_Add_Ons.add_on_id = Add_Ons.add_on_id \
             INNER JOIN Rentals ON Rentals_Add_Ons.rental_id = Rentals.rental_id \
@@ -389,27 +433,39 @@ def cars():
             vin_input = request.form["vin"]
             mileage_input = request.form["mileage"]
             availability_input = request.form["availability"]
-            query_parameters = [location_input,make_input,model_input,year_input,body_input,price_input,color_input,plate_input,vin_input,mileage_input,availability_input]
-
-            query = "INSERT INTO Cars (location_id, make, model, year, car_body_type, daily_price, color, license_plate_num, vin, current_mileage, current_availability) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            
+            query_parameters = [location_input,make_input,model_input,year_input,body_input,price_input,
+                                color_input,plate_input,vin_input,mileage_input,availability_input]
+            query = "INSERT INTO Cars (location_id, make, model, year, car_body_type, daily_price, color, \
+                        license_plate_num, vin, current_mileage, current_availability) \
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             return redirect("/Cars")
         elif request.form.get("search_car_make"):
             make_input = request.form["make"]
-            query = "SELECT * FROM Cars WHERE make = %s;"
+            query = "SELECT C.car_id, CONCAT(L.address,', ',L.city) AS 'Location', C.make, C.model, C.year, C.car_body_type, \
+                        C.daily_price, C.color, C.license_plate_num, C.vin, C.current_mileage, C.current_availability \
+                    FROM Cars AS C\
+                    LEFT JOIN Locations AS L ON C.location_id = L.location_id \
+                    WHERE C.make = %s;"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[make_input])
             results = cursor.fetchall()
             return render_template('cars.j2', Cars=results, locations=searchResults, makes=searchResultsMake)
         elif request.form.get("search_car_availability"):
             availability_input = request.form["availability"]
-            query = "SELECT * FROM Cars WHERE current_availability = %s;"
+            query = "SELECT C.car_id, CONCAT(L.address,', ',L.city) AS 'Location', C.make, C.model, C.year, C.car_body_type, \
+                        C.daily_price, C.color, C.license_plate_num, C.vin, C.current_mileage, C.current_availability \
+                    FROM Cars AS C\
+                    LEFT JOIN Locations AS L ON C.location_id = L.location_id \
+                    WHERE C.current_availability = %s;"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[availability_input])
             results = cursor.fetchall()
             return render_template('cars.j2', Cars=results, locations=searchResults, makes=searchResultsMake)
     # else:
-    query = "SELECT Cars.car_id, Locations.address AS 'Location', Cars.make, Cars.model, Cars.year, Cars.car_body_type, Cars.daily_price, Cars.color, Cars.license_plate_num, Cars.vin, Cars.current_mileage, Cars.current_availability \
-            FROM Cars \
-            LEFT JOIN Locations ON Cars.location_id = Locations.location_id;"
+    query = "SELECT C.car_id, CONCAT(L.address,', ',L.city) AS 'Location', C.make, C.model, C.year, C.car_body_type, \
+                C.daily_price, C.color, C.license_plate_num, C.vin, C.current_mileage, C.current_availability \
+            FROM Cars AS C\
+            LEFT JOIN Locations AS L ON C.location_id = L.location_id;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template('cars.j2', Cars=results, locations=searchResults, makes=searchResultsMake)
@@ -433,15 +489,24 @@ def cars_update(id):
             vin_input = request.form["vin"]
             mileage_input = request.form["mileage"]
             availability_input = request.form["availability"]
-            query_parameters = [location_input,make_input,model_input,year_input,body_input,price_input,color_input,plate_input,vin_input,mileage_input,availability_input]
+            query_parameters = [location_input,make_input,model_input,year_input,body_input,price_input,
+                                color_input,plate_input,vin_input,mileage_input,availability_input]
             query_parameters.append(id)
 
-            query = "UPDATE Cars SET Cars.location_id = %s, Cars.make = %s, Cars.model = %s, Cars.year = %s, Cars.car_body_type = %s, Cars.daily_price = %s, Cars.color = %s, Cars.license_plate_num = %s, Cars.vin = %s, Cars.current_mileage = %s, Cars.current_availability = %s WHERE Cars.car_id = %s"
+            query = "UPDATE Cars SET Cars.location_id = %s, Cars.make = %s, Cars.model = %s, Cars.year = %s, \
+                        Cars.car_body_type = %s, Cars.daily_price = %s, Cars.color = %s, Cars.license_plate_num = %s, \
+                        Cars.vin = %s, Cars.current_mileage = %s, Cars.current_availability = %s \
+                    WHERE Cars.car_id = %s"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             
         return redirect("/Cars")
     else:
-        query = "SELECT * FROM Cars WHERE car_id = %s;"
+        query = "SELECT C.car_id, L.location_id, CONCAT(L.address,', ',L.city) AS 'Location', C.make, \
+                    C.model, C.year, C.car_body_type, C.daily_price, C.color, C.license_plate_num, \
+                    C.vin, C.current_mileage, C.current_availability \
+                FROM Cars AS C\
+                LEFT JOIN Locations AS L ON C.location_id = L.location_id \
+                WHERE C.car_id = %s;"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=[id])
         results = cursor.fetchall()
         body_types = ["Sedan", "Coupe", "SUV", "Minivan"]
@@ -471,7 +536,8 @@ def locations():
             zipcode_input = request.form["zipcode"]
             qty_input = request.form["qty"]
             query_parameters = [address_input,city_input,state_input,zipcode_input,qty_input]
-            query = "INSERT INTO Locations (address, city, state, zipcode, num_cars) VALUES (%s, %s, %s, %s, %s);"
+            query = "INSERT INTO Locations (address, city, state, zipcode, num_cars) \
+                    VALUES (%s, %s, %s, %s, %s);"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             return redirect("/Locations")
 
@@ -500,7 +566,9 @@ def locations_update(id):
             query_parameters = [address_input,city_input,state_input,zipcode_input,qty_input]
             query_parameters.append(id)
 
-            query = "UPDATE Locations SET Locations.address = %s, Locations.city = %s, Locations.state = %s, Locations.zipcode = %s, Locations.num_cars = %s WHERE Locations.location_id = %s"
+            query = "UPDATE Locations SET Locations.address = %s, Locations.city = %s, Locations.state = %s, \
+                        Locations.zipcode = %s, Locations.num_cars = %s \
+                    WHERE Locations.location_id = %s"
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_parameters)
             
         return redirect("/Locations")
@@ -520,6 +588,6 @@ def locations_delete(id):
 
 # Listener
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 4444))
     #Start the app on port 3000, it will be different once hosted
     app.run(port=port, debug=True)
